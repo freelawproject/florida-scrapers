@@ -1,4 +1,6 @@
 import { Browser, Page } from "puppeteer"
+import { loginToStJohns } from "./login"
+import { waitFor, windowSet } from "../lib/utils"
 
 export class StJohnsScraper {
   _url: string
@@ -11,10 +13,18 @@ export class StJohnsScraper {
 
   public async scrape(): Promise<void> {
     const page = await this._browser.newPage()
+
+    // inject env variables into the page
+    await windowSet(page, "username", process.env.LOGIN_USERNAME)
+    await windowSet(page, "password", process.env.LOGIN_PASSWORD)
+
     console.log(`Navigating to ${this._url}`)
     await page.goto(this._url)
 
     try {
+      // login if not already
+      await loginToStJohns(page)
+
       // wait for the searchrorm to resolve before starting
       await page.waitForSelector("form.searchform")
 
@@ -44,12 +54,6 @@ export class StJohnsScraper {
       console.log(e)
     }
   }
-}
-
-const waitFor = (delay: number): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay)
-  })
 }
 
 const clickSubmit = async (page: Page): Promise<void> => {
