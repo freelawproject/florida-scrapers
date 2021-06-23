@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:freelawproject/florida-scrapers.git",
-  "author": "Nick Sethi <nicholas.sethi@gmail.com>",
+  "author": "Nick Sethi <info@free.lawc>",
   "license": "MIT",
   "devDependencies": {
     "@types/jsdom": "^16.2.11",
@@ -12,12 +12,17 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.28.0",
     "jsdom": "^16.6.0",
+    "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
     "puppeteer": "^10.0.0",
+    "puppeteer-extra": "^3.1.18",
+    "puppeteer-extra-plugin-recaptcha": "^3.4.0",
+    "puppeteer-extra-plugin-stealth": "^2.7.8",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
   },
   "scripts": {
+    "dev": "nodemon",
     "start": "ts-node src/index.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
