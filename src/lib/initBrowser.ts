@@ -4,9 +4,6 @@ import RecaptchaPlugin from "puppeteer-extra-plugin-recaptcha"
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
 
 let browser: Browser
-// add recaptcha plugin and provide it your 2captcha token (= their apiKey)
-// 2captcha is the builtin solution provider but others would work as well.
-// Please note: You need to add funds to your 2captcha account for this to work
 
 export const initBrowser = async (): Promise<Browser> => {
   if (!browser) {
