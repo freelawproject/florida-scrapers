@@ -23,4 +23,14 @@ WARNING: If you are not careful about closing the automated browsers after makin
 
 ## Pre-Deployment
 
+#### Change Headless Option
 Before running the program in a cloud production environment, change the headless option to false in the initBrowser.ts file. Otherwise the cloud instance will try to run the browser gui and crash.
+
+#### Add .env file
+The following env variables need to be set in a .env file
+
+```
+# Court login credentials
+LOGIN_USERNAME=johnny.utah@ohiostate.com
+LOGIN_PASSWORD=iamanfbiagent
+```
