@@ -2,7 +2,7 @@ import { Page } from "puppeteer"
 
 const SEARCH_PAGE_URL = "https://apps.stjohnsclerk.com/Benchmark//CourtCase.aspx/CaseSearch"
 
-interface CaseJSON {
+export interface CaseJSON {
   partyName: string
   partyDetailsUrl: string
   partyType: string
@@ -20,12 +20,12 @@ export const handleResultsPage = async (page: Page): Promise<CaseJSON[]> => {
   await dataTable.$$eval("tbody > tr", (els) => {
     els.forEach((el) => {
       const json: CaseJSON = {
-        partyName: "",
-        partyDetailsUrl: "",
-        partyType: "",
-        caseDetailsUrl: "",
         caseNumber: "",
         caseStatus: "",
+        caseDetailsUrl: "",
+        partyName: "",
+        partyType: "",
+        partyDetailsUrl: "",
       }
 
       // each row has 5 tds to grab

@@ -6,6 +6,7 @@
   "author": "Nick Sethi <info@freelaw.co>",
   "license": "MIT",
   "devDependencies": {
+    "@types/async-csv": "^2.1.0",
     "@types/jsdom": "^16.2.11",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
@@ -26,5 +27,8 @@
     "start": "ts-node --require dotenv/config src/index.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
+  },
+  "dependencies": {
+    "async-csv": "^2.1.3"
   }
 }
