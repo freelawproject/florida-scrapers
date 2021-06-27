@@ -13,13 +13,15 @@ The program uses Puppeteer (with Plugins) to generate a headless browser instanc
 2. run yarn install
 3. run yarn start
 
-## Hot Reloading (Warning!)
+## Hot Reloading ~(Warning!)~
 
 If you don't want to have to restart the scraper everytime you make a change, you can start the program by using `yarn dev` instead of `yarn start`.
 
 What this does is enable nodemon to watch the /src directory for any changes in the *.ts files and restarts the index.ts module.
 
-WARNING: If you are not careful about closing the automated browsers after making changes, you may end up with dozens of chromium app instances running.
+~WARNING: If you are not careful about closing the automated browsers after making changes, you may end up with dozens of chromium app instances running.~
+
+**Update!** Nodemon now ends the current browser session on restart.
 
 ## Pre-Deployment
 

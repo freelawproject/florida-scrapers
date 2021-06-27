@@ -22,3 +22,5 @@ export const initBrowser = async (): Promise<Browser> => {
 
   return browser
 }
+
+export const getBrowser = (): Browser | null => browser

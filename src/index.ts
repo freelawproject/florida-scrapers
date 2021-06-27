@@ -1,4 +1,4 @@
-import { initBrowser } from "./lib/initBrowser"
+import { initBrowser } from "./lib/browser"
 import { StJohnsScraper } from "./stjohns/scraper"
 
 declare global {
