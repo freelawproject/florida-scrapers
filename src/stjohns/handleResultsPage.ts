@@ -11,6 +11,12 @@ export interface CaseJSON {
   caseStatus: string
 }
 
+/**
+ * HandleResultsPage
+ * Function that extracts the table rows from the Search Results Page
+ * and stores the case details data into a csv
+ */
+
 export const handleResultsPage = async (page: Page): Promise<CaseJSON[]> => {
   // find the table with cases
   const dataTable = await page.$("table#gridSearchResults")
