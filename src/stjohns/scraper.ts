@@ -13,7 +13,6 @@ export class StJohnsScraper {
   }
 
   public async scrape(): Promise<void> {
-    const page = await this._browser.newPage()
-    await handleSearchPage(page, this._url)
+    await handleSearchPage(this._browser, this._url)
   }
 }

@@ -1,8 +1,10 @@
-import { Page } from "puppeteer"
+import { Browser, Page } from "puppeteer"
 import { waitFor, windowSet } from "../lib/utils"
 import { loginToStJohns } from "./login"
 
-export const handleSearchPage = async (page: Page, url: string): Promise<void> => {
+export const handleSearchPage = async (browser: Browser, url: string): Promise<void> => {
+  const page = await browser.newPage()
+
   // inject env variables into the page
   await windowSet(page, "username", process.env.LOGIN_USERNAME)
   await windowSet(page, "password", process.env.LOGIN_PASSWORD)

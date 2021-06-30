@@ -1,4 +1,4 @@
-import { Page } from "puppeteer"
+import { Browser, ElementHandle, Page } from "puppeteer"
 import { createFolder, writeHTMLToFile } from "../lib/file"
 import { windowSet } from "../lib/utils"
 
@@ -16,7 +16,7 @@ const getEmptydocJson = (): DocumentJSON => ({
   description: "",
 })
 
-const handleDownloadLink = async (anchor: HTMLAnchorElement): Promise<boolean> => {
+const handleDownloadLink = async (anchor: ElementHandle, page: Page): Promise<boolean> => {
   let success = false
   try {
   } catch (e) {
@@ -35,9 +35,9 @@ const handleDownloadLink = async (anchor: HTMLAnchorElement): Promise<boolean> =
 // 3 - Document Identification Number (Same as 0)
 // 4 - Date
 // 5 - Entry Description
-const handleDocketWithPublicDocs = async (cells: HTMLTableDataCellElement[], page: Page): Promise<DocumentJSON> => {
+const handleDocketWithPublicDocs = async (cells: ElementHandle[], browser: Browser): Promise<DocumentJSON> => {
   const json = getEmptydocJson()
-  cells.forEach((td, index) => {
+  cells.forEach(async (td, index) => {
     switch (index) {
       case 0: {
         // get the docNo from the DIN in 2
@@ -47,19 +47,35 @@ const handleDocketWithPublicDocs = async (cells: HTMLTableDataCellElement[], pag
         return
       }
       case 2: {
-        // try and download and store
+        // click on anchor
+        const anchor = await td.$("a")
+        const anchorInfo = {
+          id: anchor.getProperty("id"),
+          digest: anchor.getProperty("digest"),
+          rel: anchor.getProperty("rel"),
+        }
+        await anchor.click()
+        const pagePromise = new Promise((x) => browser.once("targetcreated", (target) => x(target.page())))
+        const popup = await pagePromise
+        console.log(popup)
+        await popup.waitForSelector('frameset[title="PDF Viewer"]')
+        // save the file
+
         // if successful, set json[downloaded] = true
       }
       case 3: {
-        json.docNo = td.textContent
+        const docNo = await td.evaluate((node) => node.textContent)
+        json.docNo = docNo
         return
       }
       case 4: {
-        json.date = td.textContent
+        const date = await td.evaluate((node) => node.textContent)
+        json.date = date
         return
       }
       case 5: {
-        json.description = td.textContent
+        const description = await td.evaluate((node) => node.textContent)
+        json.description = description
         return
       }
       default: {
@@ -76,10 +92,10 @@ const handleDocketWithPublicDocs = async (cells: HTMLTableDataCellElement[], pag
 // 2 - Document Identification Number (Same as 0)
 // 3 - Date
 // 4 - Entry Description
-const handleDocketWithoutPublicDocs = async (cells: HTMLTableDataCellElement[], page: Page): Promise<DocumentJSON> => {
+const handleDocketWithoutPublicDocs = async (cells: ElementHandle[]): Promise<DocumentJSON> => {
   const json = getEmptydocJson()
 
-  cells.forEach((td, index) => {
+  cells.forEach(async (td, index) => {
     switch (index) {
       case 0: {
         // get the docNo from the DIN in 2
@@ -92,15 +108,18 @@ const handleDocketWithoutPublicDocs = async (cells: HTMLTableDataCellElement[], 
         return
       }
       case 2: {
-        json.docNo = td.textContent
+        const docNo = await td.evaluate((node) => node.textContent)
+        json.docNo = docNo
         return
       }
       case 3: {
-        json.date = td.textContent
+        const date = await td.evaluate((node) => node.textContent)
+        json.date = date
         return
       }
       case 4: {
-        json.description = td.textContent
+        const description = await td.evaluate((node) => node.textContent)
+        json.description = description
         return
       }
       default: {
@@ -116,7 +135,9 @@ const handleDocketWithoutPublicDocs = async (cells: HTMLTableDataCellElement[], 
  * Function that saves the html to file
  * and downloads each public document
  */
-export const handleCasePage = async (page: Page, url: string): Promise<void> => {
+export const handleCasePage = async (browser: Browser, url: string): Promise<void> => {
+  const page = await browser.newPage()
+
   await windowSet(page, "username", process.env.LOGIN_USERNAME)
   await windowSet(page, "password", process.env.LOGIN_PASSWORD)
 
@@ -134,23 +155,19 @@ export const handleCasePage = async (page: Page, url: string): Promise<void> => 
     // find document table
     const table = await page.$("table#gridDockets")
     // iterate over the rows
-    await table.$$eval("tr", (els) => {
-      els.forEach(async (element) => {
-        // each row has five / six? tds
-        // 0 - Document Seq No.
-        // 1 - Document Action Link (Request or Download) // Viewer
-        // 2 - Document Identification Number (Same as 0) // Image
-        // 3 - Date
-        // 4 - Entry Description
-        const cells = Array.from(element.querySelectorAll("td"))
-        let json: DocumentJSON
-        if (cells.length === 5) {
-          json = await handleDocketWithoutPublicDocs(cells, page)
-        } else if (cells.length === 6) {
-          json = await handleDocketWithPublicDocs(cells, page)
-        }
-      })
+    const rows = await table.$$("tr")
+
+    rows.forEach(async (tr) => {
+      const cells = await tr.$$("td")
+      let json: DocumentJSON
+      if (cells.length === 5) {
+        json = await handleDocketWithoutPublicDocs(cells)
+      } else {
+        json = await handleDocketWithPublicDocs(cells, browser)
+      }
     })
+
+    console.log(rows)
     // log documentJSON to file
   } catch (e) {}
 }
