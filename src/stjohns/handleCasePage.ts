@@ -18,15 +18,19 @@ const getEmptydocJson = (): DocumentJSON => ({
   description: "",
 })
 
-const handleDownloadLink = async (anchor: ElementHandle, page: Page): Promise<boolean> => {
-  let success = false
-  try {
-  } catch (e) {
-    // delete the saved info
-    // set the success var to false
-    success = false
-  }
-  return success
+const handlePopup = async (browser: Browser): Promise<Page | void> => {
+  return new Promise((resolve): Page | void => {
+    browser.once("targetcreated", async (target): Promise<Page | void> => {
+      const newPage = await target.page()
+      const newPagePromise = new Promise(() => newPage.once("domcontentloaded", () => resolve(newPage)))
+      const isPageLoaded = await newPage.evaluate(() => document.readyState)
+      if (isPageLoaded.match("complete|interactive")) {
+        resolve(newPage as Page)
+      } else {
+        newPagePromise
+      }
+    })
+  })
 }
 
 // There are two variants of Docket Results
@@ -37,7 +41,11 @@ const handleDownloadLink = async (anchor: ElementHandle, page: Page): Promise<bo
 // 3 - Document Identification Number (Same as 0)
 // 4 - Date
 // 5 - Entry Description
-const handleDocketWithPublicDocs = async (cells: ElementHandle[], browser: Browser, fileNumber: string): Promise<DocumentJSON> => {
+const handleDocketWithPublicDocs = async (
+  cells: ElementHandle[],
+  browser: Browser,
+  fileNumber: string
+): Promise<DocumentJSON> => {
   const json = getEmptydocJson()
   cells.forEach(async (td, index) => {
     switch (index) {
@@ -52,23 +60,35 @@ const handleDocketWithPublicDocs = async (cells: ElementHandle[], browser: Brows
         // click on anchor
         const anchor = await td.$("a")
         if (!anchor) {
-          console.log('no anchor found')
+          console.log(`no anchor found in cell at index ${index}`)
           return
+        } else {
+          const newPagePromise = handlePopup(browser)
+          await anchor.click()
+          const newPage = await newPagePromise
+          if (!newPage) {
+            throw new Error("No popup page found")
+          }
+          // @ts-expect-error popupPage is of class page
+          await newPage._client.send("Page.setDownloadBehavior", {
+            behavior: "allow",
+            downloadPath: `./storage${fileNumber}`,
+          })
+
+          const downloadPage = newPage.mainFrame()
+          const viewer = await downloadPage.$("frame#frm_pdf")
+          // save the file
+          await waitFor(200)
+          const content = viewer.toString()
+          console.log(content)
+          // find the download button in the pdfViewer toolbar and click it
+          // await newPage.waitForSelector("#toolbar")
+          // const downloadControls = await toolbar.$("pierce/#downloads")
+          // console.log("downloadControls", downloadControls)
+          // const button = await downloadControls.$("pierce/cr-icon-button")
+          // console.log("button", button)
+          // await button.click()
         }
-        await anchor.click()
-        const pagePromise = new Promise((x) => browser.once("targetcreated", (target) => x(target.page())))
-        const popupPage = await pagePromise
-        // save the file
-        // @ts-expect-error popupPage is of class page
-        await (popupPage as Page)._client.send('Page.setDownloadBehavior', { 
-          behavior: 'allow',
-          downloadPath: `./storage${fileNumber}`
-        })
-        // find the download button in the pdfViewer toolbar and click it
-
-
-
-
         // if successful, set json[downloaded] = true
       }
       case 3: {
@@ -147,20 +167,19 @@ const searchByCaseNumber = async (page: Page) => {
   const caseNumberSelectInput = await page.$('input[type="radio"][searchtype="CaseNumber"]')
   await caseNumberSelectInput.click()
 
-  await page.waitForSelector('input[id="caseNumber"]');
+  await page.waitForSelector('input[id="caseNumber"]')
 
   await waitFor(500)
 
   await page.$eval('input[id="caseNumber"', (el) => {
-    el.setAttribute('value', window.caseNo)
+    el.setAttribute("value", window.caseNo)
   })
-  
+
   await waitFor(500)
 
-  const searchButton = await page.$('button#searchButton')
+  const searchButton = await page.$("button#searchButton")
   await searchButton.click()
-} 
-
+}
 
 /**
  * HandleCasePage
@@ -187,9 +206,7 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
   // give it three seconds for the tableGrid to appear
   await waitFor(3000)
 
-
   try {
-
     const filename = await page.title()
     const fileNumber = filename.split(" - ")[0]
     const pageHTML = await page.content()
@@ -197,19 +214,17 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
     await createFolder(`${process.cwd()}/storage/${fileNumber}`)
     await writeHTMLToFile(`${process.cwd()}/storage/${fileNumber}/${filename}.html`, pageHTML)
 
-    await page.waitForSelector('div#caseDocketsAccordion')
-    const docketAccordion = await page.$('div#caseDocketsAccordion')
+    await page.waitForSelector("div#caseDocketsAccordion")
+    const docketAccordion = await page.$("div#caseDocketsAccordion")
 
     if (!docketAccordion) {
-      throw new Error('No docketAccordion found. Try increasing the timeout')
+      throw new Error("No docketAccordion found. Try increasing the timeout")
     }
     // find document table
     await page.waitForSelector("table#gridDockets")
     const table = await docketAccordion.$("table#gridDockets")
-    console.log(table)
     // iterate over the rows
     const rows = await table.$$("tr")
-    console.log(rows)
 
     const rowInfo = rows.map(async (tr) => {
       const cells = await tr.$$("td")
@@ -219,6 +234,7 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
       } else {
         json = await handleDocketWithPublicDocs(cells, browser, fileNumber)
       }
+      return json
     })
 
     console.log(rowInfo)

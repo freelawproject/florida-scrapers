@@ -1,6 +1,7 @@
 import { Browser } from "puppeteer"
 import puppeteer from "puppeteer-extra"
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
+import { QueryHandler } from "query-selector-shadow-dom/plugins/puppeteer"
 
 let browser: Browser
 
@@ -9,6 +10,8 @@ export const initBrowser = async (): Promise<Browser> => {
     try {
       // enable the stealth plugin
       puppeteer.use(StealthPlugin())
+      // enable the shadow-dom query handler
+
       browser = await puppeteer.launch({
         //@ts-expect-error incorrect types when using puppeteer-extra
         headless: false,
