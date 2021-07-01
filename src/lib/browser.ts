@@ -12,7 +12,7 @@ export const initBrowser = async (): Promise<Browser> => {
       browser = await puppeteer.launch({
         //@ts-expect-error incorrect types when using puppeteer-extra
         headless: false,
-        args: ["--disable-setuid-sandbox"],
+        args: ["--disable-setuid-sandbox", "--window-size=1600,1200"],
         ignoreHTTPSErrors: true,
       })
     } catch (err) {

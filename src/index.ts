@@ -5,6 +5,7 @@ declare global {
   interface Window {
     username: string
     password: string
+    caseNo?: string
   }
 }
 
