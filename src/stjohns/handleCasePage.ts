@@ -7,30 +7,39 @@ import { loginToStJohns } from "./login"
 interface DocumentJSON {
   docNo: string
   downloaded: boolean
+  downloadable?: boolean
   date: string
   description: string
 }
 
-const getEmptydocJson = (): DocumentJSON => ({
-  docNo: "",
-  downloaded: false,
-  date: "",
-  description: "",
-})
-
-const handlePopup = async (browser: Browser): Promise<Page | void> => {
+const handlePopup = async (browser: Browser, fileNumber: string): Promise<Page | void> => {
   return new Promise((resolve): Page | void => {
-    browser.once("targetcreated", async (target): Promise<Page | void> => {
+    browser.once("targetcreated", async (target): Promise<Page> => {
       const newPage = await target.page()
-      const newPagePromise = new Promise(() => newPage.once("domcontentloaded", () => resolve(newPage)))
-      const isPageLoaded = await newPage.evaluate(() => document.readyState)
-      if (isPageLoaded.match("complete|interactive")) {
-        resolve(newPage as Page)
-      } else {
-        newPagePromise
-      }
+      await newPage._client.send("Page.setDownloadBehavior", {
+        behavior: "allow",
+        downloadPath: `${process.cwd()}/storage/${fileNumber}`,
+      })
+      return newPage
     })
   })
+}
+
+const waitForFrame = async (page: Page, frameId: string) => {
+  const checkFrame = () => {
+    const frame = page.frames().find((f) => {
+      return f.name() === frameId
+    })
+    if (frame) {
+      fulfill(frame)
+    } else {
+      page.once("frameattached", checkFrame)
+    }
+  }
+  let fulfill: (value: unknown) => void
+  const promise = new Promise((resolve) => (fulfill = resolve))
+  checkFrame()
+  return promise
 }
 
 // There are two variants of Docket Results
@@ -41,76 +50,33 @@ const handlePopup = async (browser: Browser): Promise<Page | void> => {
 // 3 - Document Identification Number (Same as 0)
 // 4 - Date
 // 5 - Entry Description
-const handleDocketWithPublicDocs = async (
-  cells: ElementHandle[],
-  browser: Browser,
-  fileNumber: string
-): Promise<DocumentJSON> => {
-  const json = getEmptydocJson()
-  cells.forEach(async (td, index) => {
-    switch (index) {
-      case 0: {
-        // get the docNo from the DIN in 2
-        return
-      }
-      case 1: {
-        return
-      }
-      case 2: {
-        // click on anchor
-        const anchor = await td.$("a")
-        if (!anchor) {
-          console.log(`no anchor found in cell at index ${index}`)
-          return
-        } else {
-          const newPagePromise = handlePopup(browser)
-          await anchor.click()
-          const newPage = await newPagePromise
-          if (!newPage) {
-            throw new Error("No popup page found")
-          }
-          // @ts-expect-error popupPage is of class page
-          await newPage._client.send("Page.setDownloadBehavior", {
-            behavior: "allow",
-            downloadPath: `./storage${fileNumber}`,
-          })
 
-          const downloadPage = newPage.mainFrame()
-          const viewer = await downloadPage.$("frame#frm_pdf")
-          // save the file
-          await waitFor(200)
-          const content = viewer.toString()
-          console.log(content)
-          // find the download button in the pdfViewer toolbar and click it
-          // await newPage.waitForSelector("#toolbar")
-          // const downloadControls = await toolbar.$("pierce/#downloads")
-          // console.log("downloadControls", downloadControls)
-          // const button = await downloadControls.$("pierce/cr-icon-button")
-          // console.log("button", button)
-          // await button.click()
-        }
-        // if successful, set json[downloaded] = true
-      }
-      case 3: {
-        const docNo = await td.evaluate((node) => node.textContent)
-        json.docNo = docNo
-        return
-      }
-      case 4: {
-        const date = await td.evaluate((node) => node.textContent)
-        json.date = date
-        return
-      }
-      case 5: {
-        const description = await td.evaluate((node) => node.textContent)
-        json.description = description
-        return
-      }
-      default: {
-        return
-      }
+const getTrimmedContent = async (el: ElementHandle): Promise<string | undefined> => {
+  if (el) {
+    const text = await el.evaluate((node) => node.textContent)
+    return text.replace(/\B\s+|\s+\B/g, "")
+  }
+  return
+}
+
+const handleDocketWithPublicDocs = async (cells: ElementHandle[]): Promise<DocumentJSON> => {
+  await waitFor(500)
+
+  const json: DocumentJSON = {
+    docNo: await getTrimmedContent(cells[0]),
+    date: await getTrimmedContent(cells[4]),
+    description: await getTrimmedContent(cells[5]),
+    downloaded: false,
+  }
+
+  const anchorCell = cells[2]
+  if (anchorCell) {
+    const anchor = await anchorCell.$("a")
+    if (anchor) {
+      json.downloadable = true
     }
-  })
+  }
+
   return json
 }
 
@@ -121,41 +87,12 @@ const handleDocketWithPublicDocs = async (
 // 3 - Date
 // 4 - Entry Description
 const handleDocketWithoutPublicDocs = async (cells: ElementHandle[]): Promise<DocumentJSON> => {
-  const json = getEmptydocJson()
-
-  cells.forEach(async (td, index) => {
-    switch (index) {
-      case 0: {
-        // get the docNo from the DIN in 2
-        return
-      }
-      case 1: {
-        // try and download and store
-
-        // if successful, set json[downloaded] = true
-        return
-      }
-      case 2: {
-        const docNo = await td.evaluate((node) => node.textContent)
-        json.docNo = docNo
-        return
-      }
-      case 3: {
-        const date = await td.evaluate((node) => node.textContent)
-        json.date = date
-        return
-      }
-      case 4: {
-        const description = await td.evaluate((node) => node.textContent)
-        json.description = description
-        return
-      }
-      default: {
-        return
-      }
-    }
-  })
-  return json
+  return {
+    downloaded: false,
+    docNo: await getTrimmedContent(cells[0]),
+    date: await getTrimmedContent(cells[3]),
+    description: await getTrimmedContent(cells[4]),
+  }
 }
 
 /**
@@ -179,6 +116,7 @@ const searchByCaseNumber = async (page: Page) => {
 
   const searchButton = await page.$("button#searchButton")
   await searchButton.click()
+  await page.waitForNavigation()
 }
 
 /**
@@ -203,8 +141,8 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
   console.log(`Searching for case number ${caseInfo.caseNumber}`)
   await searchByCaseNumber(page)
 
-  // give it three seconds for the tableGrid to appear
-  await waitFor(3000)
+  // give it 1500 ms for the tableGrid to appear
+  await waitFor(1500)
 
   try {
     const filename = await page.title()
@@ -213,31 +151,31 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
 
     await createFolder(`${process.cwd()}/storage/${fileNumber}`)
     await writeHTMLToFile(`${process.cwd()}/storage/${fileNumber}/${filename}.html`, pageHTML)
-
-    await page.waitForSelector("div#caseDocketsAccordion")
-    const docketAccordion = await page.$("div#caseDocketsAccordion")
-
-    if (!docketAccordion) {
-      throw new Error("No docketAccordion found. Try increasing the timeout")
-    }
     // find document table
     await page.waitForSelector("table#gridDockets")
-    const table = await docketAccordion.$("table#gridDockets")
-    // iterate over the rows
-    const rows = await table.$$("tr")
+    const table = await page.$("table#gridDockets")
 
+    if (!table) {
+      throw new Error("No grid docket table found. Try increasing the timeout")
+    }
+    const rowData: DocumentJSON[] = []
+
+    const rows = await table.$$("tr")
     const rowInfo = rows.map(async (tr) => {
       const cells = await tr.$$("td")
       let json: DocumentJSON
       if (cells.length === 5) {
         json = await handleDocketWithoutPublicDocs(cells)
       } else {
-        json = await handleDocketWithPublicDocs(cells, browser, fileNumber)
+        json = await handleDocketWithPublicDocs(cells)
       }
       return json
     })
 
-    console.log(rowInfo)
+    const json = await Promise.all(rowInfo)
+
+    console.log(JSON.stringify(json, null, 2))
+
     // log documentJSON to file
   } catch (e) {
     console.error(e)
