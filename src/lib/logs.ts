@@ -10,7 +10,7 @@ export const logToFile = async (fileNameWithoutExt: string, infoToLog: Record<st
 
   const newJSON = { ...existingJSON, ...infoToLog }
 
-  await asyncWriteJSON(filePath, newJSON)
+  await writeJSONtoFile(filePath, newJSON)
 }
 
 const asyncReadJSONFile = async (path: string): Promise<JSON> => {
@@ -29,7 +29,7 @@ const asyncReadJSONFile = async (path: string): Promise<JSON> => {
   })
 }
 
-const asyncWriteJSON = async (path: string, json: JSON): Promise<void> => {
+export const writeJSONtoFile = async (path: string, json: Record<string, any>): Promise<void> => {
   return new Promise((resolve, reject) => {
     try {
       fs.writeFile(path, JSON.stringify(json), (err) => {

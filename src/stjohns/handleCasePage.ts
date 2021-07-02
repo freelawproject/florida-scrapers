@@ -1,9 +1,10 @@
-import { Browser, ElementHandle, Frame, Page } from "puppeteer"
-import { createFolder, writeHTMLToFile } from "../lib/file"
+import { Browser, ElementHandle, Page } from "puppeteer"
+import { createFolder, writeBlobToDisk, writeHTMLToFile } from "../lib/file"
 import { waitFor, windowSet } from "../lib/utils"
 import { CaseJSON } from "./handleResultsPage"
 import { loginToStJohns } from "./login"
 import fetch from "cross-fetch"
+import { writeJSONtoFile } from "../lib/logs"
 
 interface DocumentJSON {
   docNo: string
@@ -14,69 +15,59 @@ interface DocumentJSON {
   row?: number
 }
 
-const handlePopup = async (browser: Browser, fileNumber: string): Promise<Page | void> => {
-  return new Promise((resolve): Page | void => {
+const STORAGE_PREFIX = `${process.cwd()}/storage/stjohns`
+
+const resolvePageJSON = async (page: Page, fileNumber: string, json: DocumentJSON): Promise<DocumentJSON> => {
+  return new Promise((resolve, reject) => {
+    page.on("request", async (req) => {
+      //@ts-expect-error calling from class
+      const url = req._url
+      if (!url.match(/GetPDF\?/)) {
+        req.continue()
+      } else {
+        req.abort()
+        const options = {
+          encoding: null,
+          //@ts-expect-error calling from class
+          method: req._method,
+          //@ts-expect-error calling from class
+          body: req._postData,
+          //@ts-expect-error calling from class
+          headers: req._headers,
+        }
+
+        const cookies = await page.cookies()
+
+        options.headers.Cookie = cookies.map((ck) => `${ck.name}=${ck.value}`).join(";")
+
+        //@ts-expect-error calling from class
+        const res = await fetch(req._url, options)
+        await waitFor(150)
+        console.log(`Status: ${res.statusText}`)
+        if (res.ok) {
+          const blob = await res.blob()
+          const fileName = `${json.docNo}-case-${fileNumber}.pdf`
+          console.log(`Saving file ${fileName} to folder ${fileNumber}`)
+          const success = await writeBlobToDisk(blob, `${STORAGE_PREFIX}/${fileNumber}/${fileName}`)
+          resolve({ ...json, downloaded: success })
+        } else {
+          reject(res.statusText)
+        }
+      }
+    })
+  })
+}
+const handlePopup = async (browser: Browser): Promise<Page> => {
+  return new Promise((resolve): void => {
     browser.once("targetcreated", async (target): Promise<void> => {
       const newPage = await target.page({ waitFor: 200 })
       ;(newPage as Page).on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
 
       await (newPage as Page).setRequestInterception(true)
-      ;(newPage as Page).on("request", async (req) => {
-        //@ts-expect-error calling from class
-        const url = req._url
-        if (!url.match(/GetPDF\?/)) {
-          req.continue()
-        } else {
-          req.abort()
-
-          const options = {
-            encoding: null,
-            //@ts-expect-error calling from class
-            method: req._method,
-            //@ts-expect-error calling from class
-            body: req._postData,
-            //@ts-expect-error calling from class
-            headers: req._headers,
-          }
-
-          const cookies = await (newPage as Page).cookies()
-
-          options.headers.Cookie = cookies.map((ck) => `${ck.name}=${ck.value}`).join(";")
-
-          console.log(options)
-          //@ts-expect-error calling from class
-          const res = await fetch(req._url, options)
-          await waitFor(150)
-          console.log(`Status: ${res.statusText}`)
-          console.log(`Response Headers: ${JSON.stringify(res.headers, null, 2)}`)
-          if (res.ok) {
-            const blob = await res.blob()
-            console.log(blob.type, blob.size)
-          }
-        }
-      })
-      resolve(newPage)
+      resolve(newPage as Page)
     })
   })
 }
-
-const waitForFrame = async (page: Page, frameId: string) => {
-  const checkFrame = () => {
-    const frame = page.frames().find((f) => {
-      return f.name() === frameId
-    })
-    if (frame) {
-      fulfill(frame)
-    } else {
-      page.once("frameattached", checkFrame)
-    }
-  }
-  let fulfill: (value: unknown) => void
-  const promise = new Promise((resolve) => (fulfill = resolve))
-  checkFrame()
-  return promise
-}
-
 // There are two variants of Docket Results
 // A. One with publicly avaialble dockets (six cells)
 // 0 - Document Seq No.
@@ -186,8 +177,8 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
     const fileNumber = filename.split(" - ")[0]
     const pageHTML = await page.content()
 
-    await createFolder(`${process.cwd()}/storage/${fileNumber}`)
-    await writeHTMLToFile(`${process.cwd()}/storage/${fileNumber}/${filename}.html`, pageHTML)
+    await createFolder(`${STORAGE_PREFIX}/${fileNumber}`)
+    await writeHTMLToFile(`${STORAGE_PREFIX}/${fileNumber}/${filename}.html`, pageHTML)
     // find document table
     await page.waitForSelector("table#gridDockets")
     const table = await page.$("table#gridDockets")
@@ -210,39 +201,34 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
 
     const json = await Promise.all(rowInfo)
 
-    const firstDownloadable = json.find((j) => j.downloadable)
+    const downloadedJsonInfo = []
 
-    const row = rows[firstDownloadable.row]
+    for (let i = 0; i < json.length; i++) {
+      const j = json[i]
+      if (j.downloadable) {
+        const row = rows[j.row]
+        const cells = await row.$$("td")
+        const anchorCell = cells[2]
+        const anchor = await anchorCell.$("a")
+        const newPagePromise = handlePopup(browser)
+        await anchor.click()
+        const newPage = await newPagePromise
+        const newJson = await resolvePageJSON(newPage as Page, fileNumber, j)
+        downloadedJsonInfo.push(newJson)
+        await newPage.close()
+      } else {
+        downloadedJsonInfo.push(j)
+      }
+    }
 
-    const cells = await row.$$("td")
+    const resolvedJsonInfo = await Promise.all(downloadedJsonInfo)
 
-    const anchorCell = cells[2]
-    const anchor = await anchorCell.$("a")
-    const newPagePromise = handlePopup(browser, fileNumber)
-    await anchor.click()
-    const newPage = await newPagePromise
-
-    // request to intercept?
-    // https://apps.stjohnsclerk.com/Benchmark/ImageAsync.aspx/GetPDF?guid=bfe05552-b767-4158-988b-141a6c9c5081
-
-    // const frame = await waitForFrame(newPage as Page, "frm_pdf")
-
-    // const src = (frame as Frame).url()
-    // await windowSet(newPage as Page, "pdfUrl", src)
-
-    // await (newPage as Page).evaluate(() => {
-    //   fetch(`${window.location}`)
-    //     .then((res) => res)
-    //     .then((res2) => {
-    //       return res2.json()
-    //     })
-    //     .then((res3) => console.log(res3))
-    // })
-
-    // await (newPage as Page).type('')
+    await writeJSONtoFile(`${STORAGE_PREFIX}/log.json`, resolvedJsonInfo)
 
     // log documentJSON to file
   } catch (e) {
     console.error(e)
+  } finally {
+    await browser.close()
   }
 }
