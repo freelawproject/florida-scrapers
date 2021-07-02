@@ -6,7 +6,8 @@ declare global {
     username: string
     password: string
     caseNo?: string
-    pdfUrl?: string
+    startDate?: string
+    endDate?: string
   }
 }
 

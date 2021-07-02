@@ -1,14 +1,6 @@
 import { Browser, Page } from "puppeteer"
 import { handleCasePage } from "./handleCasePage"
-
-const mockCaseInfo = {
-  partyName: "JANESK, KENNETH J",
-  partyType: "JUDGE",
-  partyDetailsUrl: "",
-  caseDetailsUrl: "https://apps.stjohnsclerk.com/Benchmark/CourtCase.aspx/Details/1043137?digest=c6ICTChFmZ%2BTQ4VOQAvu4Q",
-  caseNumber: "GA21-0101",
-  caseStatus: "OPEN"
-}
+import { handleSearchPage } from "./handleSearchPage"
 
 export class StJohnsScraper {
   _url: string
@@ -20,7 +12,8 @@ export class StJohnsScraper {
   }
 
   public async scrape(): Promise<void> {
-    await handleCasePage(this._browser, mockCaseInfo, this._url)
+    // await handleCasePage(this._browser, mockCaseInfo, this._url)
+    await handleSearchPage(this._browser, this._url)
   }
 }
 
