@@ -1,6 +1,6 @@
 import { Browser, Page } from "puppeteer"
-import { handleCasePage } from "./handleCasePage"
 import { handleSearchPage } from "./handleSearchPage"
+import { eachMonthOfInterval, endOfMonth, format } from "date-fns"
 
 export class StJohnsScraper {
   _url: string
@@ -12,8 +12,21 @@ export class StJohnsScraper {
   }
 
   public async scrape(): Promise<void> {
-    // await handleCasePage(this._browser, mockCaseInfo, this._url)
-    await handleSearchPage(this._browser, this._url)
+    const result = eachMonthOfInterval({
+      start: new Date(2010, 1, 1),
+      end: new Date(),
+    })
+    const formattedDates = result.map((startDate) => {
+      const endDate = endOfMonth(startDate)
+      return {
+        startDate: format(startDate, "MM/dd/yyyy"),
+        endDate: format(endDate, "MM/dd/yyyy"),
+      }
+    })
+    for (let i = 0; i < formattedDates.length; i++) {
+      const dates = formattedDates[i]
+      await handleSearchPage(this._browser, this._url, dates.startDate, dates.endDate)
+    }
   }
 }
 
