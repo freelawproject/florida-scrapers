@@ -1,8 +1,9 @@
-import { Browser, ElementHandle, Page } from "puppeteer"
+import { Browser, ElementHandle, Frame, Page } from "puppeteer"
 import { createFolder, writeHTMLToFile } from "../lib/file"
 import { waitFor, windowSet } from "../lib/utils"
 import { CaseJSON } from "./handleResultsPage"
 import { loginToStJohns } from "./login"
+import fetch from "cross-fetch"
 
 interface DocumentJSON {
   docNo: string
@@ -10,17 +11,51 @@ interface DocumentJSON {
   downloadable?: boolean
   date: string
   description: string
+  row?: number
 }
 
 const handlePopup = async (browser: Browser, fileNumber: string): Promise<Page | void> => {
   return new Promise((resolve): Page | void => {
-    browser.once("targetcreated", async (target): Promise<Page> => {
-      const newPage = await target.page()
-      await newPage._client.send("Page.setDownloadBehavior", {
-        behavior: "allow",
-        downloadPath: `${process.cwd()}/storage/${fileNumber}`,
+    browser.once("targetcreated", async (target): Promise<void> => {
+      const newPage = await target.page({ waitFor: 200 })
+      ;(newPage as Page).on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
+
+      await (newPage as Page).setRequestInterception(true)
+      ;(newPage as Page).on("request", async (req) => {
+        //@ts-expect-error calling from class
+        const url = req._url
+        if (!url.match(/GetPDF\?/)) {
+          req.continue()
+        } else {
+          req.abort()
+
+          const options = {
+            encoding: null,
+            //@ts-expect-error calling from class
+            method: req._method,
+            //@ts-expect-error calling from class
+            body: req._postData,
+            //@ts-expect-error calling from class
+            headers: req._headers,
+          }
+
+          const cookies = await (newPage as Page).cookies()
+
+          options.headers.Cookie = cookies.map((ck) => `${ck.name}=${ck.value}`).join(";")
+
+          console.log(options)
+          //@ts-expect-error calling from class
+          const res = await fetch(req._url, options)
+          await waitFor(150)
+          console.log(`Status: ${res.statusText}`)
+          console.log(`Response Headers: ${JSON.stringify(res.headers, null, 2)}`)
+          if (res.ok) {
+            const blob = await res.blob()
+            console.log(blob.type, blob.size)
+          }
+        }
       })
-      return newPage
+      resolve(newPage)
     })
   })
 }
@@ -59,7 +94,7 @@ const getTrimmedContent = async (el: ElementHandle): Promise<string | undefined>
   return
 }
 
-const handleDocketWithPublicDocs = async (cells: ElementHandle[]): Promise<DocumentJSON> => {
+const handleDocketWithPublicDocs = async (cells: ElementHandle[], row: number): Promise<DocumentJSON> => {
   await waitFor(500)
 
   const json: DocumentJSON = {
@@ -67,6 +102,7 @@ const handleDocketWithPublicDocs = async (cells: ElementHandle[]): Promise<Docum
     date: await getTrimmedContent(cells[4]),
     description: await getTrimmedContent(cells[5]),
     downloaded: false,
+    row: row,
   }
 
   const anchorCell = cells[2]
@@ -86,8 +122,9 @@ const handleDocketWithPublicDocs = async (cells: ElementHandle[]): Promise<Docum
 // 2 - Document Identification Number (Same as 0)
 // 3 - Date
 // 4 - Entry Description
-const handleDocketWithoutPublicDocs = async (cells: ElementHandle[]): Promise<DocumentJSON> => {
+const handleDocketWithoutPublicDocs = async (cells: ElementHandle[], row): Promise<DocumentJSON> => {
   return {
+    row: row,
     downloaded: false,
     docNo: await getTrimmedContent(cells[0]),
     date: await getTrimmedContent(cells[3]),
@@ -158,23 +195,51 @@ export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: 
     if (!table) {
       throw new Error("No grid docket table found. Try increasing the timeout")
     }
-    const rowData: DocumentJSON[] = []
 
     const rows = await table.$$("tr")
-    const rowInfo = rows.map(async (tr) => {
+    const rowInfo = rows.map(async (tr, row) => {
       const cells = await tr.$$("td")
       let json: DocumentJSON
       if (cells.length === 5) {
-        json = await handleDocketWithoutPublicDocs(cells)
+        json = await handleDocketWithoutPublicDocs(cells, row)
       } else {
-        json = await handleDocketWithPublicDocs(cells)
+        json = await handleDocketWithPublicDocs(cells, row)
       }
       return json
     })
 
     const json = await Promise.all(rowInfo)
 
-    console.log(JSON.stringify(json, null, 2))
+    const firstDownloadable = json.find((j) => j.downloadable)
+
+    const row = rows[firstDownloadable.row]
+
+    const cells = await row.$$("td")
+
+    const anchorCell = cells[2]
+    const anchor = await anchorCell.$("a")
+    const newPagePromise = handlePopup(browser, fileNumber)
+    await anchor.click()
+    const newPage = await newPagePromise
+
+    // request to intercept?
+    // https://apps.stjohnsclerk.com/Benchmark/ImageAsync.aspx/GetPDF?guid=bfe05552-b767-4158-988b-141a6c9c5081
+
+    // const frame = await waitForFrame(newPage as Page, "frm_pdf")
+
+    // const src = (frame as Frame).url()
+    // await windowSet(newPage as Page, "pdfUrl", src)
+
+    // await (newPage as Page).evaluate(() => {
+    //   fetch(`${window.location}`)
+    //     .then((res) => res)
+    //     .then((res2) => {
+    //       return res2.json()
+    //     })
+    //     .then((res3) => console.log(res3))
+    // })
+
+    // await (newPage as Page).type('')
 
     // log documentJSON to file
   } catch (e) {
