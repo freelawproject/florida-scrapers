@@ -1,7 +1,6 @@
 import { Browser, ElementHandle, Page } from "puppeteer"
 import { createFolder, writeBlobToDisk, writeHTMLToFile } from "../lib/file"
 import { waitFor, windowSet } from "../lib/utils"
-import { CaseJSON } from "./handleResultsPage"
 import { loginToStJohns } from "./login"
 import fetch from "cross-fetch"
 import { writeJSONtoFile } from "../lib/logs"
@@ -15,7 +14,7 @@ interface DocumentJSON {
   row?: number
 }
 
-const STORAGE_PREFIX = `${process.cwd()}/storage/stjohns`
+const STORAGE_PREFIX = `${process.cwd()}/storage/stjohns/files`
 
 const resolvePageJSON = async (page: Page, fileNumber: string, json: DocumentJSON): Promise<DocumentJSON> => {
   return new Promise((resolve, reject) => {

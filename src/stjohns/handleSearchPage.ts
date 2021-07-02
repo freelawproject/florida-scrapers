@@ -1,7 +1,7 @@
 import { Browser, Page } from "puppeteer"
 import { createFolder } from "../lib/file"
 import { waitFor, windowSet } from "../lib/utils"
-import { handleAllresults } from "./handleResultsPage"
+import { handleAllResults } from "./handleResultsPage"
 import { loginToStJohns } from "./login"
 
 export const handleSearchPage = async (
@@ -58,11 +58,11 @@ export const handleSearchPage = async (
     // make the storage folder just in case
     await createFolder(`${process.cwd()}/storage/stjohns/searches`)
 
-    await handleAllresults(page, searchId)
+    await handleAllResults(page, searchId)
   } catch (e) {
     console.log(e)
   } finally {
-    await waitFor(2500)
-    await browser.close()
+    await waitFor(1500)
+    await page.close()
   }
 }

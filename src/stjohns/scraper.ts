@@ -1,6 +1,6 @@
 import { Browser, Page } from "puppeteer"
 import { handleSearchPage } from "./handleSearchPage"
-import { eachMonthOfInterval, endOfMonth, format } from "date-fns"
+import { eachMonthOfInterval, endOfMonth, format, isAfter } from "date-fns"
 
 export class StJohnsScraper {
   _url: string
@@ -12,12 +12,17 @@ export class StJohnsScraper {
   }
 
   public async scrape(): Promise<void> {
+    const today = new Date()
     const result = eachMonthOfInterval({
       start: new Date(2010, 1, 1),
-      end: new Date(),
+      end: today,
     })
     const formattedDates = result.map((startDate) => {
-      const endDate = endOfMonth(startDate)
+      // only go to end of the current period or the form will err
+      let endDate = endOfMonth(startDate)
+      if (isAfter(endDate, today)) {
+        endDate = today
+      }
       return {
         startDate: format(startDate, "MM/dd/yyyy"),
         endDate: format(endDate, "MM/dd/yyyy"),
@@ -26,6 +31,7 @@ export class StJohnsScraper {
     for (let i = 0; i < formattedDates.length; i++) {
       const dates = formattedDates[i]
       await handleSearchPage(this._browser, this._url, dates.startDate, dates.endDate)
+      console.log(dates)
     }
   }
 }
