@@ -1,7 +1,6 @@
 import { Browser, ElementHandle, Page } from "puppeteer"
 import { createFolder, writeBlobToDisk, writeHTMLToFile } from "../lib/file"
 import { waitFor, windowSet } from "../lib/utils"
-import { loginToStJohns } from "./login"
 import fetch from "cross-fetch"
 import { writeJSONtoFile } from "../lib/logs"
 
@@ -112,7 +111,7 @@ const handleDocketWithPublicDocs = async (cells: ElementHandle[], row: number): 
 // 2 - Document Identification Number (Same as 0)
 // 3 - Date
 // 4 - Entry Description
-const handleDocketWithoutPublicDocs = async (cells: ElementHandle[], row): Promise<DocumentJSON> => {
+const handleDocketWithoutPublicDocs = async (cells: ElementHandle[], row: number): Promise<DocumentJSON> => {
   return {
     row: row,
     downloaded: false,
@@ -151,16 +150,16 @@ const searchByCaseNumber = async (page: Page) => {
  * Function that saves the html to file
  * and downloads each public document
  */
-export const handleCasePage = async (browser: Browser, caseInfo: CaseJSON, url: string): Promise<void> => {
+export const handleCasePage = async (
+  browser: Browser,
+  caseInfo: { caseNumber: string },
+  url: string
+): Promise<void> => {
   const page = await browser.newPage()
 
-  await windowSet(page, "username", process.env.LOGIN_USERNAME)
-  await windowSet(page, "password", process.env.LOGIN_PASSWORD)
   await windowSet(page, "caseNo", caseInfo.caseNumber)
 
   await page.goto(url)
-  console.log(`Logging in through ${url}`)
-  await loginToStJohns(page)
 
   await waitFor(200)
 

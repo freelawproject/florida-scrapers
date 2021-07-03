@@ -1,6 +1,5 @@
 import { promises as fs } from "fs"
 import csv from "async-csv"
-import { CaseJSON } from "../stjohns/handleResultsPage"
 
 const readCSV = async (path: string): Promise<(string | number)[][]> => {
   try {
@@ -28,7 +27,7 @@ const writeCSV = async (path: string, rows: (string | number)[][]): Promise<void
 // if case number not present, add it to the csv
 // else do nothing
 // close csv
-export const writeRowsToCSV = async (path: string, rows: CaseJSON[]): Promise<void> => {
+export const writeRowsToCSV = async (path: string, rows: Record<string, any>[]): Promise<void> => {
   await fs.copyFile(path, `${path}_${new Date().toISOString()}.backup`)
 
   const data = await readCSV(path)

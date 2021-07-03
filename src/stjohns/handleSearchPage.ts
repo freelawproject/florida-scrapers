@@ -1,32 +1,17 @@
-import { Browser, Page } from "puppeteer"
+import { Page } from "puppeteer"
 import { createFolder } from "../lib/file"
-import { waitFor, windowSet } from "../lib/utils"
+import { waitFor } from "../lib/utils"
 import { handleAllResults } from "./handleResultsPage"
-import { loginToStJohns } from "./login"
 
-export const handleSearchPage = async (
-  browser: Browser,
-  url: string,
-  startDate: string,
-  endDate: string
-): Promise<void> => {
-  const page = await browser.newPage()
+export const handleSearchPage = async (searchId: string, page: Page): Promise<void> => {
+  console.log(`Getting search results for the period: ${searchId}`)
 
-  page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
   // inject env variables into the page
-  await windowSet(page, "username", process.env.LOGIN_USERNAME)
-  await windowSet(page, "password", process.env.LOGIN_PASSWORD)
 
-  await windowSet(page, "startDate", startDate)
-  await windowSet(page, "endDate", endDate)
-
-  console.log(`Navigating to ${url}`)
-  await page.goto(url)
+  // make the storage folder just in case
+  await createFolder(`${process.cwd()}/storage/stjohns/searches`)
 
   try {
-    // login if not already
-    await loginToStJohns(page)
-
     // wait for the searchrorm to resolve before starting
     await page.waitForSelector("form.searchform")
     const form = await page.$("form.searchform")
@@ -49,14 +34,8 @@ export const handleSearchPage = async (
     })
 
     await waitFor(2500)
-    await page.$eval("form.searchform", (form) => (form as HTMLFormElement).submit())
 
-    await page.waitForNavigation()
-
-    const searchId = `${startDate}-${endDate}`.replace(/\//g, ".")
-
-    // make the storage folder just in case
-    await createFolder(`${process.cwd()}/storage/stjohns/searches`)
+    await form.evaluate((f) => (f as HTMLFormElement).submit())
 
     await handleAllResults(page, searchId)
   } catch (e) {

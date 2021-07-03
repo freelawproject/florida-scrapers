@@ -1,6 +1,8 @@
 import { Browser, Page } from "puppeteer"
 import { handleSearchPage } from "./handleSearchPage"
 import { eachMonthOfInterval, endOfMonth, format, isAfter } from "date-fns"
+import { checkAuthStatus } from "./login"
+import { waitFor, windowSet } from "../lib/utils"
 
 export class StJohnsScraper {
   _url: string
@@ -12,12 +14,72 @@ export class StJohnsScraper {
   }
 
   public async scrape(): Promise<void> {
+    await this.getSearchResults()
+  }
+
+  public async getSearchResults(): Promise<void> {
+    const formattedDates = this._getDatesArray()
+    for (let i = 0; i < formattedDates.length; i++) {
+      const dates = formattedDates[i]
+      const searchId = `${dates.startDate}-${dates.endDate}`.replace(/\//g, ".")
+
+      const page = await this._browser.newPage()
+      page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
+
+      await windowSet(page, "startDate", dates.startDate)
+      await windowSet(page, "endDate", dates.endDate)
+
+      await this._login(page)
+
+      await handleSearchPage(searchId, page)
+    }
+  }
+
+  private async _login(page: Page): Promise<void> {
+    await windowSet(page, "username", process.env.LOGIN_USERNAME)
+    await windowSet(page, "password", process.env.LOGIN_PASSWORD)
+
+    await waitFor(500)
+
+    await page.goto(this._url, { waitUntil: "domcontentloaded" })
+
+    console.log("-----------------------------------------------")
+    console.log("Checking Auth Status...")
+    const isLoggedIn = await checkAuthStatus(page)
+
+    if (isLoggedIn) return
+
+    console.log("Not logged in. Logging in with user: ", process.env.LOGIN_USERNAME)
+
+    await waitFor(500)
+    await page.$("div#logonForm")
+
+    await page.$eval("input#txtUsername", (el) => el.setAttribute("value", window.username))
+    await waitFor(250)
+
+    await page.$eval("input#txtPassword", (el) => el.setAttribute("value", window.password))
+    await waitFor(250)
+
+    await page.$eval("input#cbxRememberMe", (el) => el.setAttribute("checked", "1"))
+    await waitFor(250)
+
+    const loginButton = await page.$("a#btnLogin")
+    if (loginButton) {
+      await loginButton.click()
+      await page.waitForSelector("a#btnLogout")
+      console.log("Log in successful.")
+    } else {
+      console.error("Login button not found!")
+    }
+  }
+
+  private _getDatesArray(): { startDate: string; endDate: string }[] {
     const today = new Date()
     const result = eachMonthOfInterval({
-      start: new Date(2010, 1, 1),
+      start: new Date(2009, 12, 31),
       end: today,
     })
-    const formattedDates = result.map((startDate) => {
+    return result.map((startDate) => {
       // only go to end of the current period or the form will err
       let endDate = endOfMonth(startDate)
       if (isAfter(endDate, today)) {
@@ -28,11 +90,6 @@ export class StJohnsScraper {
         endDate: format(endDate, "MM/dd/yyyy"),
       }
     })
-    for (let i = 0; i < formattedDates.length; i++) {
-      const dates = formattedDates[i]
-      await handleSearchPage(this._browser, this._url, dates.startDate, dates.endDate)
-      console.log(dates)
-    }
   }
 }
 

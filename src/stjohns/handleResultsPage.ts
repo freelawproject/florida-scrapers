@@ -8,8 +8,9 @@ import { writeJSONtoFile } from "../lib/logs"
  */
 
 export const handleAllResults = async (page: Page, searchId: string): Promise<void> => {
-  console.log(`Downloading csv from results page for searchId: ${searchId}`)
+  await page.waitForNavigation()
   await page.setRequestInterception(true)
+  console.log(`Form returned successfully. Attempting to download results for ${searchId} ...`)
   page.on("response", async (res) => {
     if (res.ok) {
       try {
