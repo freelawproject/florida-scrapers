@@ -17,6 +17,8 @@ export class StJohnsScraper {
     await this.getSearchResults()
   }
 
+  public async processResults(): Promise<void> {}
+
   public async getSearchResults(): Promise<void> {
     const formattedDates = this._getDatesArray()
     for (let i = 0; i < formattedDates.length; i++) {

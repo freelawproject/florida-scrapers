@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "lib": ["es6", "dom"],
+    "lib": ["esnext", "dom"],
     "esModuleInterop": true
   },
   "include": ["src/**/*.ts"],
