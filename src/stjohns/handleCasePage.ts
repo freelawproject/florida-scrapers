@@ -2,7 +2,7 @@ import { Browser, ElementHandle, Page } from "puppeteer"
 import { createFolder, writeBlobToDisk, writeHTMLToFile } from "../lib/file"
 import { waitFor, windowSet } from "../lib/utils"
 import fetch from "cross-fetch"
-import { writeJSONtoFile } from "../lib/logs"
+import { CaseJSON, writeJSONtoFile } from "../lib/logs"
 
 interface DocumentJSON {
   docNo: string
@@ -150,21 +150,9 @@ const searchByCaseNumber = async (page: Page) => {
  * Function that saves the html to file
  * and downloads each public document
  */
-export const handleCasePage = async (
-  browser: Browser,
-  caseInfo: { caseNumber: string },
-  url: string
-): Promise<void> => {
-  const page = await browser.newPage()
-
-  await windowSet(page, "caseNo", caseInfo.caseNumber)
-
-  await page.goto(url)
-
+export const handleCasePage = async (page: Page, browser: Browser): Promise<void> => {
   await waitFor(200)
 
-  // search for the case through the online form
-  console.log(`Searching for case number ${caseInfo.caseNumber}`)
   await searchByCaseNumber(page)
 
   // give it 1500 ms for the tableGrid to appear
@@ -227,6 +215,6 @@ export const handleCasePage = async (
   } catch (e) {
     console.error(e)
   } finally {
-    await browser.close()
+    await page.close()
   }
 }

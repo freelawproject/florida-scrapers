@@ -3,6 +3,8 @@ import { handleSearchPage } from "./handleSearchPage"
 import { eachMonthOfInterval, endOfMonth, format, isAfter } from "date-fns"
 import { checkAuthStatus } from "./login"
 import { waitFor, windowSet } from "../lib/utils"
+import { readJSONFromFile } from "../lib/logs"
+import { handleCasePage } from "./handleCasePage"
 
 export class StJohnsScraper {
   _url: string
@@ -17,7 +19,18 @@ export class StJohnsScraper {
     await this.getSearchResults()
   }
 
-  public async processResults(): Promise<void> {}
+  public async downloadDocuments(): Promise<void> {
+    const json = await readJSONFromFile(`${process.cwd()}/storage/stjohns/combined-search-results.json`)
+    for (let i = 0; i < json.data.length; i++) {
+      const data = json.data[i]
+      const page = await this._browser.newPage()
+      await this._login(page)
+      await windowSet(page, "caseNo", data.caseNo)
+      console.log(`Searching for case number ${data.caseNo}`)
+      await handleCasePage(page, this._browser)
+      console.log("-----------------------------------------------")
+    }
+  }
 
   public async getSearchResults(): Promise<void> {
     const formattedDates = this._getDatesArray()
