@@ -31,6 +31,7 @@
     "dev": "nodemon",
     "start": "ts-node --require dotenv/config src/index.ts",
     "process": "ts-node --require dotenv/config src/process.ts",
+    "download": "ts-node --require dotenv/config src/download.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
   },
