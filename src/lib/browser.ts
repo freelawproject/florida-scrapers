@@ -11,7 +11,7 @@ export const initBrowser = async (): Promise<Browser> => {
 
       browser = await puppeteer.launch({
         // @ts-expect-error wtf
-        headless: false,
+        headless: true,
         args: [
           "--disable-setuid-sandbox",
           "--window-size=1600,1200",
