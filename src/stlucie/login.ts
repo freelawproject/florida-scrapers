@@ -1,7 +1,7 @@
 import { Page } from "puppeteer"
 import { waitFor, windowSet } from "../lib/utils"
 
-const STJOHNS_LOGIN_URL = "https://apps.stjohnsclerk.com/Benchmark/Home.aspx/Search"
+const STLUCIE_LOGIN_URL = "https://courtcasesearch.stlucieclerk.com/BenchmarkWebExternal/Home.aspx/Search"
 
 export const checkAuthStatus = async (page: Page): Promise<boolean> => {
   let authStatus = false
@@ -18,12 +18,12 @@ export const checkAuthStatus = async (page: Page): Promise<boolean> => {
 }
 
 export const login = async (page: Page): Promise<void> => {
-  await windowSet(page, "username", process.env.LOGIN_USERNAME_1)
-  await windowSet(page, "password", process.env.LOGIN_PASSWORD_1)
+  await windowSet(page, "username", process.env.LOGIN_USERNAME_2)
+  await windowSet(page, "password", process.env.LOGIN_PASSWORD_2)
 
   await waitFor(500)
 
-  await page.goto(STJOHNS_LOGIN_URL, { waitUntil: "domcontentloaded" })
+  await page.goto(STLUCIE_LOGIN_URL, { waitUntil: "domcontentloaded" })
 
   console.log("-----------------------------------------------")
   console.log("Checking Auth Status...")
@@ -31,7 +31,7 @@ export const login = async (page: Page): Promise<void> => {
 
   if (isLoggedIn) return
 
-  console.log("Not logged in. Logging in with user: ", process.env.LOGIN_USERNAME_1)
+  console.log("Not logged in. Logging in with user: ", process.env.LOGIN_USERNAME_2)
 
   await waitFor(500)
   await page.$("div#logonForm")

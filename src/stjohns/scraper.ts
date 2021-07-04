@@ -8,14 +8,12 @@ import { initBrowser } from "../lib/browser"
 
 const STJOHNS_URL = "https://apps.stjohnsclerk.com/Benchmark/Home.aspx/Search"
 
-const STLUCIE_URL = "https://courtcasesearch.stlucieclerk.com/BenchmarkWebExternal/Home.aspx/Search"
-
 export class StJohnsScraper {
   _url: string
   _browser: Browser
 
   public constructor(browser: Browser) {
-    this._url = STLUCIE_URL
+    this._url = STJOHNS_URL
     this._browser = browser
   }
 

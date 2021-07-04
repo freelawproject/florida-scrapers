@@ -6,6 +6,7 @@
   "author": "Nick Sethi <info@freelaw.co>",
   "license": "MIT",
   "devDependencies": {
+    "async-csv": "^2.1.3",
     "@types/async-csv": "^2.1.0",
     "@types/jsdom": "^16.2.11",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
@@ -28,14 +29,14 @@
     "typescript": "^4.3.4"
   },
   "scripts": {
-    "dev": "nodemon",
+    "search:stjohns": "ts-node --require dotenv/config src/stjohns/index.ts",
+    "process:stjohns": "ts-node --require dotenv/config src/stjohns/process.ts",
+    "download:stjohns": "ts-node --require dotenv/config src/stjohns/download.ts",
+    "search:stlucie": "ts-node --require dotenv/config src/stlucie/index.ts",
+    "process:stlucie": "ts-node --require dotenv/config src/stlucie/process.ts",
+    "download:stlucie": "ts-node --require dotenv/config src/stlucie/download.ts",
     "start": "ts-node --require dotenv/config src/index.ts",
-    "process": "ts-node --require dotenv/config src/process.ts",
-    "download": "ts-node --require dotenv/config src/download.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
-  },
-  "dependencies": {
-    "async-csv": "^2.1.3"
   }
 }

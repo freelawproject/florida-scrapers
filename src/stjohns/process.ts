@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
-import { createFolder } from "./lib/file"
-import { CaseJSON, extractDataFromJSONRow, readJSONFromFile, writeJSONtoFile } from "./lib/logs"
+import { createFolder } from "../lib/file"
+import { CaseJSON, extractDataFromJSONRow, readJSONFromFile, writeJSONtoFile } from "../lib/logs"
 
 const returnUniques = (data: CaseJSON[]): CaseJSON[] => {
   const uniques: CaseJSON[] = []

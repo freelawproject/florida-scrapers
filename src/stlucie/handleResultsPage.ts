@@ -8,14 +8,15 @@ import { writeJSONtoFile } from "../lib/logs"
  */
 
 export const handleAllResults = async (page: Page, searchId: string): Promise<void> => {
-  await page.waitForNavigation()
   await page.setRequestInterception(true)
   console.log(`Form returned successfully. Attempting to download results for ${searchId} ...`)
   page.on("response", async (res) => {
+    console.log(res)
     if (res.ok) {
       try {
         const results = await res.json()
-        await writeJSONtoFile(`${process.cwd()}/storage/stjohns/searches/${searchId}.json`, results)
+        console.log(results)
+        await writeJSONtoFile(`${process.cwd()}/storage/stlucie/searches/${searchId}.json`, results)
         console.log(`Successfully saved search results for searchId ${searchId} to file`)
       } catch (e) {
         console.log(`Error saving search results for searchId ${searchId} to file`)
@@ -23,4 +24,5 @@ export const handleAllResults = async (page: Page, searchId: string): Promise<vo
     }
     return res
   })
+  await page.waitForNavigation()
 }

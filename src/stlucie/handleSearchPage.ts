@@ -9,9 +9,12 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
   // inject env variables into the page
 
   // make the storage folder just in case
-  await createFolder(`${process.cwd()}/storage/stjohns/searches`)
+  await createFolder(`${process.cwd()}/storage/stlucie/searches`)
 
   try {
+    // set the timeout
+    page.setDefaultNavigationTimeout(120000)
+
     // wait for the searchrorm to resolve before starting
     await page.waitForSelector("form.searchform")
     const form = await page.$("form.searchform")
@@ -21,8 +24,8 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
       const newEls = els.map((el) => {
         const name = el.getAttribute("name")
         if (name === "courtTypes") {
-          // probate is option 4 and guardianship is option 6
-          el.setAttribute("value", "4,6")
+          // probate/guardianship is 8 and guardianship is option 28
+          el.setAttribute("value", "8,28")
         } else if (name === "openedFrom") {
           el.setAttribute("value", window.startDate)
         } else if (name === "openedTo") {
@@ -36,12 +39,11 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
     await waitFor(2500)
 
     await form.evaluate((f) => (f as HTMLFormElement).submit())
-
     await handleAllResults(page, searchId)
   } catch (e) {
     console.log(e)
   } finally {
     await waitFor(1500)
-    await page.close()
+    // await page.close()
   }
 }
