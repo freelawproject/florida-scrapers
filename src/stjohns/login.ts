@@ -1,7 +1,9 @@
 import { Page } from "puppeteer"
 import { waitFor, windowSet } from "../lib/utils"
 
-const LOGIN_URL = "https://apps.stjohnsclerk.com/Benchmark/Home.aspx/Search"
+const STJOHNS_LOGIN_URL = "https://apps.stjohnsclerk.com/Benchmark/Home.aspx/Search"
+
+const STLUCIE_LOGIN_URL = "https://courtcasesearch.stlucieclerk.com/BenchmarkWebExternal/Home.aspx/Search"
 
 export const checkAuthStatus = async (page: Page): Promise<boolean> => {
   let authStatus = false
@@ -23,7 +25,7 @@ export const login = async (page: Page): Promise<void> => {
 
   await waitFor(500)
 
-  await page.goto(LOGIN_URL, { waitUntil: "domcontentloaded" })
+  await page.goto(STLUCIE_LOGIN_URL, { waitUntil: "domcontentloaded" })
 
   console.log("-----------------------------------------------")
   console.log("Checking Auth Status...")

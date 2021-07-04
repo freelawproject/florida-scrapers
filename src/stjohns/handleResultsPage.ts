@@ -15,7 +15,7 @@ export const handleAllResults = async (page: Page, searchId: string): Promise<vo
     if (res.ok) {
       try {
         const results = await res.json()
-        await writeJSONtoFile(`${process.cwd()}/storage/stjohns/searches/${searchId}.json`, results)
+        await writeJSONtoFile(`${process.cwd()}/storage/stlucie/searches/${searchId}.json`, results)
         console.log(`Successfully saved search results for searchId ${searchId} to file`)
       } catch (e) {
         console.log(`Error saving search results for searchId ${searchId} to file`)

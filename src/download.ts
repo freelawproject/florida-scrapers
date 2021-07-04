@@ -1,12 +1,18 @@
 import fetch from "cross-fetch"
-import { Browser, Page } from "puppeteer"
+import { Browser, ElementHandle, Page } from "puppeteer"
 import { initBrowser } from "./lib/browser"
 import { createFolder, writeBlobToDisk, writeHTMLToFile } from "./lib/file"
 import { readJSONFromFile, writeJSONtoFile } from "./lib/logs"
 import { waitFor, windowSet } from "./lib/utils"
-import { getTrimmedContent } from "./stjohns/handleCasePage"
 import { login } from "./stjohns/login"
 
+export const getTrimmedContent = async (el: ElementHandle): Promise<string | undefined> => {
+  if (el) {
+    const text = await el.evaluate((node) => node.textContent)
+    return text.replace(/\B\s+|\s+\B/g, "")
+  }
+  return
+}
 declare global {
   interface Window {
     username: string
@@ -19,7 +25,7 @@ declare global {
 
 const DEBUG = false
 
-const STORAGE_PREFIX = `${process.cwd()}/storage/stjohns`
+const STORAGE_PREFIX = `${process.cwd()}/storage/stlucie`
 
 export const getPopupPage = async (browser: Browser): Promise<Page> => {
   return new Promise((resolve) => {

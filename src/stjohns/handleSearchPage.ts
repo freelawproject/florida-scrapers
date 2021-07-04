@@ -9,7 +9,7 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
   // inject env variables into the page
 
   // make the storage folder just in case
-  await createFolder(`${process.cwd()}/storage/stjohns/searches`)
+  await createFolder(`${process.cwd()}/storage/stlucie/searches`)
 
   try {
     // wait for the searchrorm to resolve before starting

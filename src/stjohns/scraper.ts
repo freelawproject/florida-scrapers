@@ -4,32 +4,23 @@ import { eachMonthOfInterval, endOfMonth, format, isAfter } from "date-fns"
 import { login } from "./login"
 import { waitFor, windowSet } from "../lib/utils"
 import { readJSONFromFile } from "../lib/logs"
-import { handleCasePage } from "./handleCasePage"
 import { initBrowser } from "../lib/browser"
+
+const STJOHNS_URL = "https://apps.stjohnsclerk.com/Benchmark/Home.aspx/Search"
+
+const STLUCIE_URL = "https://courtcasesearch.stlucieclerk.com/BenchmarkWebExternal/Home.aspx/Search"
 
 export class StJohnsScraper {
   _url: string
   _browser: Browser
 
   public constructor(browser: Browser) {
-    this._url = "https://apps.stjohnsclerk.com/Benchmark/Home.aspx/Search"
+    this._url = STLUCIE_URL
     this._browser = browser
   }
 
   public async scrape(): Promise<void> {
     await this.getSearchResults()
-  }
-
-  public async downloadDocuments(): Promise<void> {
-    const json = await readJSONFromFile(`${process.cwd()}/storage/stjohns/combined-search-results.json`)
-    for (let i = 0; i < json.data.length; i++) {
-      this._browser = await initBrowser()
-      const data = json.data[i]
-      const page = await this._browser.newPage()
-      await login(page)
-      await handleCasePage(page, this._browser, data.caseNo)
-      console.log("-----------------------------------------------")
-    }
   }
 
   public async getSearchResults(): Promise<void> {
