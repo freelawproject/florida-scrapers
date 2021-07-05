@@ -35,6 +35,9 @@
     "search:stlucie": "ts-node --require dotenv/config src/stlucie/index.ts",
     "process:stlucie": "ts-node --require dotenv/config src/stlucie/process.ts",
     "download:stlucie": "ts-node --require dotenv/config src/stlucie/download.ts",
+    "search:osceola": "ts-node --require dotenv/config src/osceola/index.ts",
+    "process:osceola": "ts-node --require dotenv/config src/osceola/process.ts",
+    "download:osceola": "ts-node --require dotenv/config src/osceola/download.ts",
     "start": "ts-node --require dotenv/config src/index.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"

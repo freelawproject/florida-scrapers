@@ -1,5 +1,5 @@
 import { initBrowser } from "../lib/browser"
-import { StJohnsScraper } from "./scraper"
+import { OsceolaScraper } from "./scraper"
 
 declare global {
   interface Window {
@@ -11,10 +11,10 @@ declare global {
   }
 }
 
-const scrapeStJohns = async (): Promise<void> => {
+const scrapeOsceola = async (): Promise<void> => {
   const browser = await initBrowser()
-  const scraper = new StJohnsScraper(browser)
+  const scraper = new OsceolaScraper(browser)
   scraper.scrape()
 }
 
-scrapeStJohns()
+scrapeOsceola()
