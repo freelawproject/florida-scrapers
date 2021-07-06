@@ -32,3 +32,7 @@ export const writeBlobToDisk = async (blob: Blob, filePath: string): Promise<boo
     return false
   }
 }
+
+export const writeBufferToDisk = async (buffer: Buffer, filePath: string): Promise<void> => {
+  await fs.writeFile(filePath, buffer)
+}

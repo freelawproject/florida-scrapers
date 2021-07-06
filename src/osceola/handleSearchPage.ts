@@ -2,7 +2,6 @@ import { Page } from "puppeteer"
 import { createFolder } from "../lib/file"
 import { writeJSONtoFile } from "../lib/logs"
 import { waitFor } from "../lib/utils"
-import { handleAllResults } from "./handleResultsPage"
 
 export const handleSearchPage = async (searchId: string, page: Page): Promise<void> => {
   console.log(`Getting search results for the period: ${searchId}`)

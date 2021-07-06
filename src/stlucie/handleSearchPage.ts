@@ -1,7 +1,7 @@
 import { Page } from "puppeteer"
 import { createFolder } from "../lib/file"
 import { waitFor } from "../lib/utils"
-import { handleAllResults } from "./handleResultsPage"
+import { promises as fs } from "fs"
 
 export const handleSearchPage = async (searchId: string, page: Page): Promise<void> => {
   console.log(`Getting search results for the period: ${searchId}`)
@@ -39,11 +39,35 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
     await waitFor(2500)
 
     await form.evaluate((f) => (f as HTMLFormElement).submit())
-    await handleAllResults(page, searchId)
+
+    await page.waitForNavigation({ waitUntil: "domcontentloaded" })
+
+    // @ts-expect-error class method
+    await page._client.send("Page.setDownloadBehavior", {
+      behavior: "allow",
+      downloadPath: `${process.cwd()}/storage/stlucie/searches`,
+    })
+
+    const exportBtn = await page.$("#gridpager > table > tbody > tr > td:nth-child(1) > a")
+    await exportBtn.click()
+    console.log("Waiting for thirty seconds for csv to download...")
+    await waitFor(30000)
+
+    const incomingFileName = "SearchResults.csv"
+
+    const exists = await fs.stat(`${process.cwd()}/storage/stlucie/searches/${incomingFileName}`)
+    if (exists) {
+      console.log(`File downloaded successfully. Saving it as ${searchId}.csv`)
+      await fs.rename(
+        `${process.cwd()}/storage/stlucie/searches/${incomingFileName}`,
+        `${process.cwd()}/storage/stlucie/searches/${searchId}.csv`
+      )
+    } else {
+      throw new Error(`Failed to save results for ${searchId} to file`)
+    }
   } catch (e) {
     console.log(e)
   } finally {
-    await waitFor(1500)
-    // await page.close()
+    await page.close()
   }
 }

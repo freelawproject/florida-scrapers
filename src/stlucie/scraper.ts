@@ -20,22 +20,24 @@ export class StLucieScraper {
   }
 
   public async getSearchResults(): Promise<void> {
-    // const formattedDates = this._getDatesArray()
-    // for (let i = 0; i < formattedDates.length; i++) {
-    // const dates = formattedDates[i]
-    const dates = { startDate: "06/01/2021", endDate: "07/04/2021" }
-    const searchId = `${dates.startDate}-${dates.endDate}`.replace(/\//g, ".")
+    const formattedDates = this._getDatesArray()
+    for (let i = 0; i < formattedDates.length; i++) {
+      const dates = formattedDates[i]
+      const searchId = `${dates.startDate}-${dates.endDate}`.replace(/\//g, ".")
 
-    const page = await this._browser.newPage()
-    page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
+      const page = await this._browser.newPage()
+      page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
 
-    await windowSet(page, "startDate", dates.startDate)
-    await windowSet(page, "endDate", dates.endDate)
+      // increase the timeout from 30 to 100 because st lucie is slooow
+      page.setDefaultTimeout(100000)
 
-    await login(page)
+      await windowSet(page, "startDate", dates.startDate)
+      await windowSet(page, "endDate", dates.endDate)
 
-    await handleSearchPage(searchId, page)
-    // }
+      await login(page)
+
+      await handleSearchPage(searchId, page)
+    }
   }
 
   private _getDatesArray(): { startDate: string; endDate: string }[] {
