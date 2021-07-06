@@ -1,12 +1,13 @@
 import { promises as fs } from "fs"
 import csv from "async-csv"
 
-const readCSV = async (path: string): Promise<(string | number)[][]> => {
+export const readCSV = async (path: string): Promise<unknown[]> => {
   try {
     const csvString = await fs.readFile(path, "utf-8")
 
     const rows = await csv.parse(csvString)
-    return rows.map((row) => (row as string).split(","))
+    return rows
+    // return rows.map((row) => (row as string).split(","))
   } catch (e) {
     console.log(`Error reading csv: ${e}`)
   }
@@ -48,5 +49,5 @@ export const writeRowsToCSV = async (path: string, rows: Record<string, any>[]):
     data.push(newData)
   })
 
-  await writeCSV(path, data)
+  await writeCSV(path, data as (string | number)[][])
 }
