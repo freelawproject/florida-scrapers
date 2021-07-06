@@ -22,7 +22,6 @@ export const handleAllResults = async (page: Page, searchId: string): Promise<vo
         console.log(`Error saving search results for searchId ${searchId} to file`)
       }
     }
-    return res
+    // return res
   })
-  await page.waitForNavigation()
 }

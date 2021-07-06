@@ -1,5 +1,6 @@
 import { Page } from "puppeteer"
 import { createFolder } from "../lib/file"
+import { writeJSONtoFile } from "../lib/logs"
 import { waitFor } from "../lib/utils"
 import { handleAllResults } from "./handleResultsPage"
 
@@ -39,11 +40,33 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
     await waitFor(2500)
 
     await form.evaluate((f) => (f as HTMLFormElement).submit())
-    await handleAllResults(page, searchId)
+
+    await page.waitForNavigation()
+
+    page.on("response", async (res) => {
+      if (!res.url().match(/CaseSearch$/)) {
+        return res
+      }
+      try {
+        const results = await res.json()
+        await writeJSONtoFile(`${process.cwd()}/storage/osceola/searches/${searchId}.json`, results)
+        console.log(`Successfully saved search results for searchId ${searchId} to file`)
+      } catch (e) {
+        console.log(`Error saving search results for searchId ${searchId} to file`)
+      }
+    })
+
+    const formButtons = await page.$$("form > button")
+    const exportBtn = formButtons.find(async (btn) => {
+      const text = await btn.evaluate((el) => el.textContent)
+      return text === "Export Search Results"
+    })
+
+    await exportBtn.click()
   } catch (e) {
     console.log(e)
   } finally {
     await waitFor(1500)
-    // await page.close()
+    await page.close()
   }
 }

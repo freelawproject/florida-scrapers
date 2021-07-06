@@ -20,22 +20,21 @@ export class OsceolaScraper {
   }
 
   public async getSearchResults(): Promise<void> {
-    // const formattedDates = this._getDatesArray()
-    // for (let i = 0; i < formattedDates.length; i++) {
-    // const dates = formattedDates[i]
-    const dates = { startDate: "06/01/2021", endDate: "07/04/2021" }
-    const searchId = `${dates.startDate}-${dates.endDate}`.replace(/\//g, ".")
+    const formattedDates = this._getDatesArray()
+    for (let i = 0; i < formattedDates.length; i++) {
+      const dates = formattedDates[i]
+      const searchId = `${dates.startDate}-${dates.endDate}`.replace(/\//g, ".")
 
-    const page = await this._browser.newPage()
-    page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
+      const page = await this._browser.newPage()
+      page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
 
-    await windowSet(page, "startDate", dates.startDate)
-    await windowSet(page, "endDate", dates.endDate)
+      await windowSet(page, "startDate", dates.startDate)
+      await windowSet(page, "endDate", dates.endDate)
 
-    await login(page)
+      await login(page)
 
-    await handleSearchPage(searchId, page)
-    // }
+      await handleSearchPage(searchId, page)
+    }
   }
 
   private _getDatesArray(): { startDate: string; endDate: string }[] {
