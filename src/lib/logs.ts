@@ -70,7 +70,10 @@ export const extractDataFromJSONRow = (row: string[]): CaseJSON => {
 
   row.forEach((item, index) => {
     if (index === 1) {
-      json.caseId = item.match(/caseID\=\d{6}/)[0].replace(/caseID=/, "")
+      if (!item.match(/caseID\=\d{4,8}/)) {
+        console.log(item)
+      }
+      json.caseId = item.match(/caseID\=\d{4,8}/)[0].replace(/caseID=/, "")
       json.party = item.match(/\>.*</)[0].replace(/\>|\</g, "").trim()
     } else if (index === 2) {
       json.partyType = item
