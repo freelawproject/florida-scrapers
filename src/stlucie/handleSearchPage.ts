@@ -50,8 +50,8 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
 
     const exportBtn = await page.$("#gridpager > table > tbody > tr > td:nth-child(1) > a")
     await exportBtn.click()
-    console.log("Waiting for thirty seconds for csv to download...")
-    await waitFor(30000)
+    console.log("Waiting for fifteen seconds for csv to download...")
+    await waitFor(15000)
 
     const incomingFileName = "SearchResults.csv"
 

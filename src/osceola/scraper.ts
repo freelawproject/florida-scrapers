@@ -28,6 +28,8 @@ export class OsceolaScraper {
       const page = await this._browser.newPage()
       page.on("console", (msg) => console.log(`PAGE LOG: `, msg.text()))
 
+      // increase the timeout from 30 to 100 because st lucie is slooow
+      page.setDefaultTimeout(100000)
       await windowSet(page, "startDate", dates.startDate)
       await windowSet(page, "endDate", dates.endDate)
 
