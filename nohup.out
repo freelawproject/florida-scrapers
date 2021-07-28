@@ -1,0 +1,89 @@
+yarn run v1.22.10
+$ ts-node --require dotenv/config src/stlucie/download.ts
+Beginning download of files for 1437 cases. Chomp chomp.
+Browser instance created
+-----------------------------------------------
+Checking Auth Status...
+Not logged in. Logging in with user:  hblake
+Log in successful.
+Searching for Case No. 2012CP000014
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000014
+Found 126 documents.
+Writing log for case 2012CP000014 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000016
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000016
+Found 31 documents.
+Writing log for case 2012CP000016 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000021
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000021
+Found 51 documents.
+Writing log for case 2012CP000021 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000022
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000022
+Found 50 documents.
+Writing log for case 2012CP000022 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000030
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000030
+Found 20 documents.
+Document 16 is downloadable. Attempting to fetch it ...
+waiting for response to finish ...
+Fetch returned status: OK
+Saving file 16-case-2012CP000030.pdf to folder 2012CP000030
+(node:74807) UnhandledPromiseRejectionWarning: TimeoutError: Timeout exceeded while waiting for event
+    at Timeout.<anonymous> (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/helper.ts:146:9)
+    at listOnTimeout (internal/timers.js:555:17)
+    at processTimers (internal/timers.js:498:7)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:74807) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:74807) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+yarn run v1.22.10
+$ ts-node --require dotenv/config src/stlucie/download.ts
+Beginning download of files for 1437 cases. Chomp chomp.
+Browser instance created
+-----------------------------------------------
+Checking Auth Status...
+Not logged in. Logging in with user:  hblake
+Log in successful.
+Searching for Case No. 2012CP000014
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000014
+Found 126 documents.
+Writing log for case 2012CP000014 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000016
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000016
+Found 31 documents.
+Writing log for case 2012CP000016 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000021
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000021
+Found 51 documents.
+Writing log for case 2012CP000021 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000022

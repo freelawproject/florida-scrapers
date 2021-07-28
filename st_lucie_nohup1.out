@@ -1,0 +1,951 @@
+yarn run v1.22.10
+$ ts-node --require dotenv/config src/stlucie/download.ts
+Beginning download of files for 1464 cases. Chomp chomp.
+Browser instance created
+-----------------------------------------------
+Checking Auth Status...
+Not logged in. Logging in with user:  hblake
+Log in successful.
+Searching for Case No. 2016GA000097
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2016GA000097
+Found 20 documents.
+Writing log for case 2016GA000097 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2015GA000144
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2015GA000144
+Found 58 documents.
+Writing log for case 2015GA000144 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000005
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000005
+Found 253 documents.
+Writing log for case 2010CP000005 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000010
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000010
+Found 63 documents.
+Document 59 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 58 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 57 is downloadable. Attempting to fetch it ...
+Saving file 58-case-2010CP000010.pdf to folder 2010CP000010
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 56 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 56-case-2010CP000010.pdf to folder 2010CP000010
+Document 55 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 55-case-2010CP000010.pdf to folder 2010CP000010
+Document 54 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 54-case-2010CP000010.pdf to folder 2010CP000010
+Document 53 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 53-case-2010CP000010.pdf to folder 2010CP000010
+Document 52 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 52-case-2010CP000010.pdf to folder 2010CP000010
+Document 50 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 50-case-2010CP000010.pdf to folder 2010CP000010
+Document 49 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 49-case-2010CP000010.pdf to folder 2010CP000010
+Document 47 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 47-case-2010CP000010.pdf to folder 2010CP000010
+Document 48 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 48-case-2010CP000010.pdf to folder 2010CP000010
+Document 46 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 46-case-2010CP000010.pdf to folder 2010CP000010
+Document 44 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 44-case-2010CP000010.pdf to folder 2010CP000010
+Document 42 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 42-case-2010CP000010.pdf to folder 2010CP000010
+Document 40 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 40-case-2010CP000010.pdf to folder 2010CP000010
+Document 38 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 38-case-2010CP000010.pdf to folder 2010CP000010
+Document 39 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 39-case-2010CP000010.pdf to folder 2010CP000010
+Document 33 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 33-case-2010CP000010.pdf to folder 2010CP000010
+Document 34 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 35 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 35-case-2010CP000010.pdf to folder 2010CP000010
+Document 32 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 32-case-2010CP000010.pdf to folder 2010CP000010
+Document 28 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 29 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 28-case-2010CP000010.pdf to folder 2010CP000010
+Document 26 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 26-case-2010CP000010.pdf to folder 2010CP000010
+Document 23 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 20 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 19 is downloadable. Attempting to fetch it ...
+Saving file 20-case-2010CP000010.pdf to folder 2010CP000010
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 18 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 16 is downloadable. Attempting to fetch it ...
+Saving file 18-case-2010CP000010.pdf to folder 2010CP000010
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 13 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 13-case-2010CP000010.pdf to folder 2010CP000010
+Document 12 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 10-case-2010CP000010.pdf to folder 2010CP000010
+Document 8 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 8-case-2010CP000010.pdf to folder 2010CP000010
+Document 9 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 9-case-2010CP000010.pdf to folder 2010CP000010
+Document 6 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 6-case-2010CP000010.pdf to folder 2010CP000010
+Document 3 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 3-case-2010CP000010.pdf to folder 2010CP000010
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 4-case-2010CP000010.pdf to folder 2010CP000010
+Document 5 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 1 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 2 is downloadable. Attempting to fetch it ...
+Saving file 1-case-2010CP000010.pdf to folder 2010CP000010
+waiting twenty seconds between requests
+Fetch returned status: OK
+Writing log for case 2010CP000010 to file
+Saving file 2-case-2010CP000010.pdf to folder 2010CP000010
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000011
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000011
+Found 17 documents.
+Writing log for case 2010CP000011 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000014
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000014
+Found 268 documents.
+Document 228 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 228-case-2010CP000014.pdf to folder 2010CP000014
+Document 222 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 14 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 14-case-2010CP000014.pdf to folder 2010CP000014
+Writing log for case 2010CP000014 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000017
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000017
+Found 17 documents.
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 12 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 13 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 13-case-2010CP000017.pdf to folder 2010CP000017
+Document 14 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 14-case-2010CP000017.pdf to folder 2010CP000017
+Document 15 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 15-case-2010CP000017.pdf to folder 2010CP000017
+Document 9 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 9-case-2010CP000017.pdf to folder 2010CP000017
+Document 7 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 7-case-2010CP000017.pdf to folder 2010CP000017
+Document 8 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 8-case-2010CP000017.pdf to folder 2010CP000017
+Document 6 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 6-case-2010CP000017.pdf to folder 2010CP000017
+Document 2 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 2-case-2010CP000017.pdf to folder 2010CP000017
+Document 3 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 3-case-2010CP000017.pdf to folder 2010CP000017
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 1 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 1-case-2010CP000017.pdf to folder 2010CP000017
+Writing log for case 2010CP000017 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000018
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000018
+Found 21 documents.
+Writing log for case 2010CP000018 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000050
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000050
+Found 21 documents.
+Document 14 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 14-case-2010CP000050.pdf to folder 2010CP000050
+Document 15 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 15-case-2010CP000050.pdf to folder 2010CP000050
+Document 16 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 16-case-2010CP000050.pdf to folder 2010CP000050
+Document 17 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 17-case-2010CP000050.pdf to folder 2010CP000050
+Document 13 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 13-case-2010CP000050.pdf to folder 2010CP000050
+Document 11 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 11-case-2010CP000050.pdf to folder 2010CP000050
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+(node:69005) UnhandledPromiseRejectionWarning: FetchError: request to https://courtcasesearch.stlucieclerk.com/BenchmarkWebExternal/ImageAsync.aspx/GetPDF?guid=8199fe17-c2e8-4f7a-9129-71ddc56b275c failed, reason: read ECONNRESET
+    at ClientRequest.<anonymous> (/Users/litewarp/Projects/florida-scrapers/node_modules/node-fetch/lib/index.js:1461:11)
+    at ClientRequest.emit (events.js:376:20)
+    at ClientRequest.emit (domain.js:470:12)
+    at TLSSocket.socketErrorListener (_http_client.js:475:9)
+    at TLSSocket.emit (events.js:376:20)
+    at TLSSocket.emit (domain.js:470:12)
+    at emitErrorNT (internal/streams/destroy.js:106:8)
+    at emitErrorCloseNT (internal/streams/destroy.js:74:3)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:69005) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:69005) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Document 6 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+(node:69005) UnhandledPromiseRejectionWarning: FetchError: request to https://courtcasesearch.stlucieclerk.com/BenchmarkWebExternal/ImageAsync.aspx/GetPDF?guid=d9850a56-4fee-4056-b2eb-1d1851e95438 failed, reason: read ECONNRESET
+    at ClientRequest.<anonymous> (/Users/litewarp/Projects/florida-scrapers/node_modules/node-fetch/lib/index.js:1461:11)
+    at ClientRequest.emit (events.js:376:20)
+    at ClientRequest.emit (domain.js:470:12)
+    at TLSSocket.socketErrorListener (_http_client.js:475:9)
+    at TLSSocket.emit (events.js:376:20)
+    at TLSSocket.emit (domain.js:470:12)
+    at emitErrorNT (internal/streams/destroy.js:106:8)
+    at emitErrorCloseNT (internal/streams/destroy.js:74:3)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21)
+(node:69005) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+Document 7 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 5 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 2 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 2-case-2010CP000050.pdf to folder 2010CP000050
+Document 3 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 3-case-2010CP000050.pdf to folder 2010CP000050
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 4-case-2010CP000050.pdf to folder 2010CP000050
+Writing log for case 2010CP000050 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000051
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000051
+Found 70 documents.
+Writing log for case 2010CP000051 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000057
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000057
+Found 49 documents.
+Document 40 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 26 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 25 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 25-case-2010CP000057.pdf to folder 2010CP000057
+Document 22 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 22-case-2010CP000057.pdf to folder 2010CP000057
+Writing log for case 2010CP000057 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000060
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000060
+Found 65 documents.
+Document 11 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 11-case-2010CP000060.pdf to folder 2010CP000060
+Writing log for case 2010CP000060 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000061
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000061
+Found 60 documents.
+Writing log for case 2010CP000061 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000062
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000062
+Found 216 documents.
+Writing log for case 2010CP000062 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000063
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000063
+Found 150 documents.
+Writing log for case 2010CP000063 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000064
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000064
+Found 19 documents.
+Document 15 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 15-case-2010CP000064.pdf to folder 2010CP000064
+Document 14 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 14-case-2010CP000064.pdf to folder 2010CP000064
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 10-case-2010CP000064.pdf to folder 2010CP000064
+Document 11 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 11-case-2010CP000064.pdf to folder 2010CP000064
+Document 12 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 12-case-2010CP000064.pdf to folder 2010CP000064
+Document 13 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 13-case-2010CP000064.pdf to folder 2010CP000064
+Document 7 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 7-case-2010CP000064.pdf to folder 2010CP000064
+Document 8 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 8-case-2010CP000064.pdf to folder 2010CP000064
+Document 6 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 6-case-2010CP000064.pdf to folder 2010CP000064
+Document 5 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 5-case-2010CP000064.pdf to folder 2010CP000064
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 4-case-2010CP000064.pdf to folder 2010CP000064
+Document 1 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 2 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 2-case-2010CP000064.pdf to folder 2010CP000064
+Document 3 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Writing log for case 2010CP000064 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2010CP000065
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2010CP000065
+Found 53 documents.
+Writing log for case 2010CP000065 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2011CP000014
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2011CP000014
+Found 13 documents.
+Writing log for case 2011CP000014 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2011CP000015
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2011CP000015
+Found 21 documents.
+Document 19 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 18 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 18-case-2011CP000015.pdf to folder 2011CP000015
+Document 16 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 16-case-2011CP000015.pdf to folder 2011CP000015
+Document 11 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 11-case-2011CP000015.pdf to folder 2011CP000015
+Document 12 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 12-case-2011CP000015.pdf to folder 2011CP000015
+Document 14 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 14-case-2011CP000015.pdf to folder 2011CP000015
+Document 15 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 15-case-2011CP000015.pdf to folder 2011CP000015
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 10-case-2011CP000015.pdf to folder 2011CP000015
+Document 9 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 9-case-2011CP000015.pdf to folder 2011CP000015
+Document 8 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 8-case-2011CP000015.pdf to folder 2011CP000015
+Document 7 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 7-case-2011CP000015.pdf to folder 2011CP000015
+Document 6 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 6-case-2011CP000015.pdf to folder 2011CP000015
+Document 5 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 5-case-2011CP000015.pdf to folder 2011CP000015
+Document 2 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 2-case-2011CP000015.pdf to folder 2011CP000015
+Document 3 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 3-case-2011CP000015.pdf to folder 2011CP000015
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 4-case-2011CP000015.pdf to folder 2011CP000015
+Document 1 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 1-case-2011CP000015.pdf to folder 2011CP000015
+Writing log for case 2011CP000015 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2011CP000016
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2011CP000016
+Found 149 documents.
+Document 120 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 120-case-2011CP000016.pdf to folder 2011CP000016
+Document 117 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 117-case-2011CP000016.pdf to folder 2011CP000016
+Writing log for case 2011CP000016 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2011CP000031
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2011CP000031
+Found 4 documents.
+Writing log for case 2011CP000031 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2011CP000126
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2011CP000126
+Found 17 documents.
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 10-case-2011CP000126.pdf to folder 2011CP000126
+Document 11 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 11-case-2011CP000126.pdf to folder 2011CP000126
+Document 12 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 12-case-2011CP000126.pdf to folder 2011CP000126
+Document 13 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 13-case-2011CP000126.pdf to folder 2011CP000126
+Document 14 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 14-case-2011CP000126.pdf to folder 2011CP000126
+Document 9 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 9-case-2011CP000126.pdf to folder 2011CP000126
+Document 8 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 8-case-2011CP000126.pdf to folder 2011CP000126
+Document 7 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 7-case-2011CP000126.pdf to folder 2011CP000126
+Document 6 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 6-case-2011CP000126.pdf to folder 2011CP000126
+Document 5 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Document 2 is downloadable. Attempting to fetch it ...
+Fetch returned status: OK
+Saving file 5-case-2011CP000126.pdf to folder 2011CP000126
+waiting twenty seconds between requests
+Document 3 is downloadable. Attempting to fetch it ...
+Fetch returned status: OK
+Saving file 2-case-2011CP000126.pdf to folder 2011CP000126
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 3-case-2011CP000126.pdf to folder 2011CP000126
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 4-case-2011CP000126.pdf to folder 2011CP000126
+Document 1 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 1-case-2011CP000126.pdf to folder 2011CP000126
+Writing log for case 2011CP000126 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2011CP000127
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2011CP000127
+Found 61 documents.
+Writing log for case 2011CP000127 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000001
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000001
+Found 7 documents.
+Writing log for case 2012CP000001 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000002
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000002
+Found 22 documents.
+Document 19 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 19-case-2012CP000002.pdf to folder 2012CP000002
+Document 13 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 13-case-2012CP000002.pdf to folder 2012CP000002
+Document 15 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 15-case-2012CP000002.pdf to folder 2012CP000002
+Document 16 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 16-case-2012CP000002.pdf to folder 2012CP000002
+Document 17 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 18 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 18-case-2012CP000002.pdf to folder 2012CP000002
+Document 12 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 11 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 5 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 5-case-2012CP000002.pdf to folder 2012CP000002
+Document 7 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 7-case-2012CP000002.pdf to folder 2012CP000002
+Document 10 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 10-case-2012CP000002.pdf to folder 2012CP000002
+Document 2 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 2-case-2012CP000002.pdf to folder 2012CP000002
+Document 3 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 3-case-2012CP000002.pdf to folder 2012CP000002
+Document 4 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 4-case-2012CP000002.pdf to folder 2012CP000002
+Document 1 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 1-case-2012CP000002.pdf to folder 2012CP000002
+Writing log for case 2012CP000002 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000003
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000003
+Found 36 documents.
+Writing log for case 2012CP000003 to file
+-----------------------------------------------
+Checking Auth Status...
+Searching for Case No. 2012CP000005
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000005
+Found 250 documents.
+Document 242 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 242-case-2012CP000005.pdf to folder 2012CP000005
+Document 240 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 240-case-2012CP000005.pdf to folder 2012CP000005
+Document 225 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 219 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 219-case-2012CP000005.pdf to folder 2012CP000005
+Document 218 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 218-case-2012CP000005.pdf to folder 2012CP000005
+Document 217 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 216 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 216-case-2012CP000005.pdf to folder 2012CP000005
+Document 215 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Document 214 is downloadable. Attempting to fetch it ...
+Fetch returned status: OK
+Saving file 215-case-2012CP000005.pdf to folder 2012CP000005
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 214-case-2012CP000005.pdf to folder 2012CP000005
+Document 213 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 213-case-2012CP000005.pdf to folder 2012CP000005
+Document 212 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 212-case-2012CP000005.pdf to folder 2012CP000005
+Document 211 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 210 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Saving file 211-case-2012CP000005.pdf to folder 2012CP000005
+Fetch returned status: OK
+Document 209 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 206 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 209-case-2012CP000005.pdf to folder 2012CP000005
+Saving file 206-case-2012CP000005.pdf to folder 2012CP000005
+Document 205 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 204 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Saving file 205-case-2012CP000005.pdf to folder 2012CP000005
+Fetch returned status: OK
+Saving file 204-case-2012CP000005.pdf to folder 2012CP000005
+Document 203 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 203-case-2012CP000005.pdf to folder 2012CP000005
+Document 202 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 202-case-2012CP000005.pdf to folder 2012CP000005
+Document 201 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 201-case-2012CP000005.pdf to folder 2012CP000005
+Document 200 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 200-case-2012CP000005.pdf to folder 2012CP000005
+Document 199 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 199-case-2012CP000005.pdf to folder 2012CP000005
+Document 198 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 198-case-2012CP000005.pdf to folder 2012CP000005
+Document 197 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 197-case-2012CP000005.pdf to folder 2012CP000005
+Document 195 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 195-case-2012CP000005.pdf to folder 2012CP000005
+Document 194 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 194-case-2012CP000005.pdf to folder 2012CP000005
+Document 193 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 191 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 191-case-2012CP000005.pdf to folder 2012CP000005
+Document 189 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 189-case-2012CP000005.pdf to folder 2012CP000005
+Document 188 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 188-case-2012CP000005.pdf to folder 2012CP000005
+Document 186 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 186-case-2012CP000005.pdf to folder 2012CP000005
+Document 185 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 185-case-2012CP000005.pdf to folder 2012CP000005
+Document 184 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 184-case-2012CP000005.pdf to folder 2012CP000005
+Document 183 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 183-case-2012CP000005.pdf to folder 2012CP000005
+Document 182 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 182-case-2012CP000005.pdf to folder 2012CP000005
+Document 181 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 181-case-2012CP000005.pdf to folder 2012CP000005
+Document 180 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 180-case-2012CP000005.pdf to folder 2012CP000005
+Document 179 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 179-case-2012CP000005.pdf to folder 2012CP000005
+Document 178 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 178-case-2012CP000005.pdf to folder 2012CP000005
+Document 177 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 177-case-2012CP000005.pdf to folder 2012CP000005
+Document 176 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 176-case-2012CP000005.pdf to folder 2012CP000005
+Document 175 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 175-case-2012CP000005.pdf to folder 2012CP000005
+Document 174 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Document 173 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 173-case-2012CP000005.pdf to folder 2012CP000005
+Document 172 is downloadable. Attempting to fetch it ...
+waiting twenty seconds between requests
+Fetch returned status: OK
+Saving file 172-case-2012CP000005.pdf to folder 2012CP000005
+Document 171 is downloadable. Attempting to fetch it ...
+(node:69005) UnhandledPromiseRejectionWarning: Error: Execution context was destroyed, most likely because of a navigation.
+    at rewriteError (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/ExecutionContext.ts:322:15)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at ExecutionContext._evaluateInternal (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/ExecutionContext.ts:271:7)
+    at ElementHandle.evaluateHandle (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/JSHandle.ts:185:12)
+    at Object.internalHandler.queryAll (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/QueryHandler.ts:83:24)
+    at downloadAllDocuments (/Users/litewarp/Projects/florida-scrapers/src/stlucie/download.ts:151:23)
+(node:69005) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)

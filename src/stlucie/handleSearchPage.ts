@@ -26,6 +26,24 @@ export const handleSearchPage = async (searchId: string, page: Page): Promise<vo
         if (name === "courtTypes") {
           // probate/guardianship is 8 and guardianship is option 28
           el.setAttribute("value", "8,28")
+        } else if (name === "caseTypes") {
+          // 110 - guardianship foreign
+          // 111 - guardianship incapacity
+          // 112 - guardianship voluntary
+          // 116 - guardianship (misc)
+          // 120 - other probate
+          // 215 - conservatorship
+          // 217 - guardian advocate pers / prop
+          // 218 - guardian advocate person
+          // 224 - guardianship voluntary
+          // 225 - guardianship (misc)
+          // 226 - guardianship foreign
+          // 238 - "" with property
+          // 239 - guardian or guard advoc person only
+          // 240 - ""
+          // 241 - "" with property
+          // 257 - probate trust proceedings
+          el.setAttribute("value", "110,111,112,116,120,215,217,218,224,225,226,238,239,240,241,257")
         } else if (name === "openedFrom") {
           el.setAttribute("value", window.startDate)
         } else if (name === "openedTo") {

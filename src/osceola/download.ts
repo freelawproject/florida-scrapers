@@ -47,17 +47,28 @@ const testJson = {
     },
   ],
 }
+
+const DOWNLOAD_BOOKMARK = "2010 GA 000031 GR"
+
 const downloadAllDocuments = async (): Promise<void> => {
   const json = DEBUG ? testJson : await readJSONFromFile(`${STORAGE_PREFIX}/combined-search-results.json`)
 
-  const { data, count } = json
-  console.log(`Beginning download of files for ${count} cases. Chomp chomp.`)
+  let data = json.data
+  if (DOWNLOAD_BOOKMARK) {
+    const index = data.findIndex((doc) => doc.caseNo === DOWNLOAD_BOOKMARK)
+    if (index > -1) {
+      data = data.slice(index + 1)
+    }
+  }
+
+  // const { data, count } = json
+  console.log(`Beginning download of files for ${data.length} cases. Chomp chomp.`)
   const browser = await initBrowser()
 
   for (let i = 0; i < data.length; i++) {
     const docket = data[i]
 
-    await createFolder(`${STORAGE_PREFIX}/files/${docket.caseNo}`)
+    await createFolder(`${STORAGE_PREFIX}2/files/${docket.caseNo}`)
 
     const page = await browser.newPage()
     page.on("console", (msg) => console.log(`CLIENT: `, msg.text()))
@@ -77,17 +88,17 @@ const downloadAllDocuments = async (): Promise<void> => {
     await waitFor(1000)
     await searchBtn.click()
     await page.waitForNavigation()
+    await page.waitForSelector("table#gridDockets", { timeout: 30000 })
 
     const filename = await page.title()
     const pageHTML = await page.content()
-    await writeHTMLToFile(`${STORAGE_PREFIX}/files/${docket.caseNo}/${filename}.html`, pageHTML)
-
-    await page.waitForSelector("table#gridDockets", { timeout: 30000 })
-    console.log(`Extracting document information for case ${docket.caseNo}`)
     const table = await page.$("table#gridDockets")
 
     console.log("Waiting five seconds for document table to load")
     await waitFor(5000)
+    await writeHTMLToFile(`${STORAGE_PREFIX}2/files/${docket.caseNo}/${filename}.html`, pageHTML)
+
+    console.log(`Extracting document information for case ${docket.caseNo}`)
 
     const rows = await table.$$("tr")
 
@@ -121,63 +132,63 @@ const downloadAllDocuments = async (): Promise<void> => {
     const resolved = await Promise.all(processed)
     console.log(`Found ${resolved.length} documents.`)
 
-    const finalJsonData = []
+    // const finalJsonData = []
 
-    for (let docIndex = 0; docIndex < resolved.length; docIndex++) {
-      const doc = resolved[docIndex]
-      if (!doc.downloadable) {
-        finalJsonData.push(doc)
-      } else {
-        await waitFor(500)
-        console.log(`Document ${doc.docNo} is downloadable. Attempting to fetch it ...`)
-        const row = rows[doc.row]
-        const cells = await row.$$("td")
-        const anchor = await cells[1].$("a")
+    // for (let docIndex = 0; docIndex < resolved.length; docIndex++) {
+    //   const doc = resolved[docIndex]
+    //   if (!doc.downloadable) {
+    //     finalJsonData.push(doc)
+    //   } else {
+    //     await waitFor(500)
+    //     console.log(`Document ${doc.docNo} is downloadable. Attempting to fetch it ...`)
+    //     const row = rows[doc.row]
+    //     const cells = await row.$$("td")
+    //     const anchor = await cells[1].$("a")
 
-        const popupPromise = getPopupPage(browser)
-        await anchor.click()
-        const popupPage = await popupPromise
-        popupPage.on("request", async (req) => {
-          //@ts-expect-error calling from class
-          const { _url, _method, _postData, _headers } = req
-          const isPdfUrl = _url.match(/GetPDF\?/)
+    //     const popupPromise = getPopupPage(browser)
+    //     await anchor.click()
+    //     const popupPage = await popupPromise
+    //     popupPage.on("request", async (req) => {
+    //       //@ts-expect-error calling from class
+    //       const { _url, _method, _postData, _headers } = req
+    //       const isPdfUrl = _url.match(/GetPDF\?/)
 
-          if (!isPdfUrl) {
-            req.continue()
-          } else {
-            req.abort()
+    //       if (!isPdfUrl) {
+    //         req.continue()
+    //       } else {
+    //         req.abort()
 
-            const cookies = await popupPage.cookies()
-            const res = await fetch(_url, {
-              method: _method,
-              body: _postData,
-              headers: {
-                ..._headers,
-                Cookie: cookies.map((c) => `${c.name}=${c.value}`).join(";"),
-              },
-            })
-            console.log(`Fetch returned status: ${res.statusText}`)
-            if (res.ok) {
-              const blob = await res.blob()
-              const fileName = `${doc.docNo}-case-${docket.caseNo}.pdf`
-              console.log(`Saving file ${fileName} to folder ${docket.caseNo}`)
-              await writeBlobToDisk(blob, `${STORAGE_PREFIX}/files/${docket.caseNo}/${fileName}`)
-            }
-            finalJsonData.push({ ...doc, downloaded: true })
-          }
-        })
+    //         const cookies = await popupPage.cookies()
+    //         const res = await fetch(_url, {
+    //           method: _method,
+    //           body: _postData,
+    //           headers: {
+    //             ..._headers,
+    //             Cookie: cookies.map((c) => `${c.name}=${c.value}`).join(";"),
+    //           },
+    //         })
+    //         console.log(`Fetch returned status: ${res.statusText}`)
+    //         if (res.ok) {
+    //           const blob = await res.blob()
+    //           const fileName = `${doc.docNo}-case-${docket.caseNo}.pdf`
+    //           console.log(`Saving file ${fileName} to folder ${docket.caseNo}`)
+    //           await writeBlobToDisk(blob, `${STORAGE_PREFIX}/files/${docket.caseNo}/${fileName}`)
+    //         }
+    //         finalJsonData.push({ ...doc, downloaded: true })
+    //       }
+    //     })
 
-        console.log("waiting five seconds between requests")
-        await waitFor(5000)
-        // turn off the popup listener so it can be reset
-        browser.removeAllListeners("targetcreated")
-        await popupPage.close()
-      }
-    }
+    //     console.log("waiting five seconds between requests")
+    //     await waitFor(5000)
+    //     // turn off the popup listener so it can be reset
+    //     browser.removeAllListeners("targetcreated")
+    //     await popupPage.close()
+    //   }
+    // }
 
     console.log(`Writing log for case ${docket.caseNo} to file`)
-    const finalFinalJsonData = await Promise.all(finalJsonData)
-    await writeJSONtoFile(`${STORAGE_PREFIX}/files/${docket.caseNo}/log.json`, finalFinalJsonData)
+    // const finalFinalJsonData = await Promise.all(finalJsonData)
+    await writeJSONtoFile(`${STORAGE_PREFIX}2/files/${docket.caseNo}/log.json`, resolved)
     await page.close()
   }
   await browser.close()

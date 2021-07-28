@@ -60,4 +60,35 @@ const processAllResults = async () => {
   })
 }
 
-processAllResults()
+const processAllJson = async (): Promise<void> => {
+  const folders = await fs.readdir(`${process.cwd()}/storage/stlucie/files`)
+  console.log(folders.length)
+  const hasDocuments = []
+  let documentCount = 0
+
+  for (let i = 0; i < folders.length; i++) {
+    const folder = folders[i]
+    if (folder.match(/^[\d]{4}/)) {
+      let json
+      try {
+        json = await readJSONFromFile(`${process.cwd()}/storage/stlucie/files/${folder}/log.json`)
+      } catch (e) {
+        console.log(`No log.json found for ${folder}`)
+      }
+      if (json) {
+        const docs = json.filter((j) => j.downloadable === true)
+        if (docs.length > 0) {
+          hasDocuments.push(folder)
+          documentCount += docs.length
+        }
+      }
+    }
+  }
+
+  console.log(`Found ${documentCount} documents in ${hasDocuments.length} cases. Saving results to file`)
+
+  await writeJSONtoFile(`${process.cwd()}/storage/stlucie/searches/cases-with-docs.json`, hasDocuments)
+}
+
+// processAllResults()
+processAllJson()

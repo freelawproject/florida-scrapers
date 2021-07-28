@@ -1,0 +1,176 @@
+yarn run v1.22.10
+$ ts-node --require dotenv/config src/stlucie/download.ts
+Beginning download of files for 1438 cases. Chomp chomp.
+Browser instance created
+-----------------------------------------------
+Checking Auth Status...
+Not logged in. Logging in with user:  hblake
+Log in successful.
+Searching for Case No. 2012CP000005
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000005
+Found 250 documents.
+Document 242 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 242-case-2012CP000005.pdf to folder 2012CP000005
+Document 240 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 240-case-2012CP000005.pdf to folder 2012CP000005
+Document 225 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 225-case-2012CP000005.pdf to folder 2012CP000005
+Document 219 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 219-case-2012CP000005.pdf to folder 2012CP000005
+Document 218 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 218-case-2012CP000005.pdf to folder 2012CP000005
+Document 217 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 217-case-2012CP000005.pdf to folder 2012CP000005
+Document 216 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 216-case-2012CP000005.pdf to folder 2012CP000005
+Document 215 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 215-case-2012CP000005.pdf to folder 2012CP000005
+Document 214 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 214-case-2012CP000005.pdf to folder 2012CP000005
+Document 213 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 213-case-2012CP000005.pdf to folder 2012CP000005
+Document 212 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 212-case-2012CP000005.pdf to folder 2012CP000005
+Document 211 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 211-case-2012CP000005.pdf to folder 2012CP000005
+Document 210 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 210-case-2012CP000005.pdf to folder 2012CP000005
+Document 209 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 209-case-2012CP000005.pdf to folder 2012CP000005
+Document 206 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 206-case-2012CP000005.pdf to folder 2012CP000005
+Document 205 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 205-case-2012CP000005.pdf to folder 2012CP000005
+Document 204 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 204-case-2012CP000005.pdf to folder 2012CP000005
+Document 203 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 203-case-2012CP000005.pdf to folder 2012CP000005
+Document 202 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 202-case-2012CP000005.pdf to folder 2012CP000005
+Document 201 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 201-case-2012CP000005.pdf to folder 2012CP000005
+Document 200 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 200-case-2012CP000005.pdf to folder 2012CP000005
+Document 199 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 199-case-2012CP000005.pdf to folder 2012CP000005
+Document 198 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 198-case-2012CP000005.pdf to folder 2012CP000005
+Document 197 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 197-case-2012CP000005.pdf to folder 2012CP000005
+Document 195 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 195-case-2012CP000005.pdf to folder 2012CP000005
+Document 194 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 194-case-2012CP000005.pdf to folder 2012CP000005
+Document 193 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 193-case-2012CP000005.pdf to folder 2012CP000005
+Document 191 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 191-case-2012CP000005.pdf to folder 2012CP000005
+Document 189 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 189-case-2012CP000005.pdf to folder 2012CP000005
+Document 188 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 188-case-2012CP000005.pdf to folder 2012CP000005
+Document 186 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 186-case-2012CP000005.pdf to folder 2012CP000005
+Document 185 is downloadable. Attempting to fetch it ...
+waiting thirty seconds between requests
+Fetch returned status: OK
+Saving file 185-case-2012CP000005.pdf to folder 2012CP000005
+Document 184 is downloadable. Attempting to fetch it ...
+Error: Execution context was destroyed, most likely because of a navigation.
+    at rewriteError (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/ExecutionContext.ts:322:15)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at ExecutionContext._evaluateInternal (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/ExecutionContext.ts:271:7)
+    at ElementHandle.evaluateHandle (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/JSHandle.ts:185:12)
+    at Object.internalHandler.queryAll (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/QueryHandler.ts:83:24)
+    at downloadAllDocuments (/Users/litewarp/Projects/florida-scrapers/src/stlucie/download.ts:164:23)
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.10
+$ ts-node --require dotenv/config src/stlucie/download.ts
+Beginning download of files for 1438 cases. Chomp chomp.
+Browser instance created
+-----------------------------------------------
+Checking Auth Status...
+Not logged in. Logging in with user:  hblake
+Log in successful.
+Searching for Case No. 2012CP000005
+Waiting for document table to load
+CLIENT:  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+Extracting document information for case 2012CP000005
+Found 250 documents.
+Document 242 is downloadable. Attempting to fetch it ...
+waiting for response to finish ...
+Fetch returned status: OK
+Saving file 242-case-2012CP000005.pdf to folder 2012CP000005
+(node:74195) UnhandledPromiseRejectionWarning: TimeoutError: Timeout exceeded while waiting for event
+    at Timeout.<anonymous> (/Users/litewarp/Projects/florida-scrapers/node_modules/puppeteer/src/common/helper.ts:146:9)
+    at listOnTimeout (internal/timers.js:555:17)
+    at processTimers (internal/timers.js:498:7)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:74195) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:74195) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.

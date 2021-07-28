@@ -20,7 +20,17 @@ export class StLucieScraper {
   }
 
   public async getSearchResults(): Promise<void> {
-    const formattedDates = this._getDatesArray()
+    // const formattedDates = this._getDatesArray()
+    const formattedDates = [
+      {
+        startDate: "11/01/2016",
+        endDate: "11/30/2016",
+      },
+      {
+        startDate: "12/01/2015",
+        endDate: "12/31/2015",
+      },
+    ]
     for (let i = 0; i < formattedDates.length; i++) {
       const dates = formattedDates[i]
       const searchId = `${dates.startDate}-${dates.endDate}`.replace(/\//g, ".")

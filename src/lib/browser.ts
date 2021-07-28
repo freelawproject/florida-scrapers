@@ -14,7 +14,7 @@ export const initBrowser = async (): Promise<Browser> => {
         headless: true,
         args: [
           "--disable-setuid-sandbox",
-          "--window-size=1600,1200",
+          // "--window-size=1600,1200",
           "--disable-web-security",
           "--disable-features=IsolateOrigins,site-per-process",
         ],
